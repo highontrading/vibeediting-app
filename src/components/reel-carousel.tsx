@@ -3,51 +3,33 @@
 import { useEffect, useRef } from "react";
 import type { HeroReel } from "@/config/site";
 
-// Laptop/tablet: cards sit on a gentle arch and drift left → right continuously.
-// Phone: a stack. One card sits in the middle, its neighbours tucked behind it; every few
-// seconds the next card swings out from behind and slides over the middle one.
-// `offset` is measured in cards; dragging or swiping moves it in both layouts.
-const AUTO_SPEED = 0.22; // arch: cards per second
+// Laptop/tablet: cards sit on a gentle arch and drift left → right.
+// Phone: cards overlap like a fanned deck and drift right → left. Each card coming in from the
+// right slides over the one in the middle; the stacking order never flips, so nothing jumps.
+// Both drift continuously; dragging or swiping moves them freely, with momentum.
+// `offset` is measured in cards.
+const AUTO_SPEED = 0.22; // cards per second
 const RESUME_AFTER = 1600; // ms of no touching before the automatic movement comes back
-const STACK_HOLD = 1700; // stack: ms each card stays in the middle
-const STACK_MOVE = 1000; // stack: ms for the next card to slide in
 const BUTTON_MOVE = 600; // ms for the arrow buttons
 
 const isStack = (width: number) => width < 640;
 
-// Smoothly interpolates between keyframes [a, value] (eased between each pair).
-function keyframes(points: [number, number][], a: number) {
-  if (a <= points[0][0]) return points[0][1];
-  for (let i = 1; i < points.length; i++) {
-    const [a1, v1] = points[i];
-    if (a <= a1) {
-      const [a0, v0] = points[i - 1];
-      const t = (a - a0) / (a1 - a0);
-      return v0 + (v1 - v0) * t * t * (3 - 2 * t);
-    }
-  }
-  return points[points.length - 1][1];
-}
-
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-const STACK_CARD = 200; // px, must match the phone card width below
+const STACK_SPACING = 108; // px between phone cards (cards are 200px wide, so they overlap)
 
 function layout(rel: number, width: number) {
   const abs = Math.abs(rel);
-  const side = Math.sign(rel);
   if (isStack(width)) {
-    // At abs 0.5 (half way through a change) the two cards are side by side, so the one on top
-    // can switch without any flicker; at abs 1 a card is tucked behind the middle one.
-    const x = side * STACK_CARD * keyframes([[0, 0], [0.5, 0.47], [1, 0.34], [2, 0.6], [3, 0.78]], abs);
+    // Cards further right sit on top, so an incoming card always covers the middle one.
     return {
-      x,
-      y: keyframes([[0, 0], [0.5, 8], [1, 14], [2, 26], [3, 36]], abs),
-      rotate: side * keyframes([[0, 0], [0.5, 4], [1, 6], [2, 9], [3, 11]], abs),
-      scale: keyframes([[0, 1], [0.5, 0.93], [1, 0.86], [2, 0.76], [3, 0.68]], abs),
-      opacity: keyframes([[2, 1], [2.8, 0]], abs),
-      shade: keyframes([[0, 0], [1, 0.16], [2, 0.3]], abs),
-      z: 100 - Math.round(abs * 10),
+      x: rel * STACK_SPACING * (1 - Math.min(abs, 3) * 0.06),
+      y: abs * abs * 7,
+      rotate: rel * 4,
+      scale: 1 - Math.min(abs, 3) * 0.07,
+      opacity: abs > 2.2 ? Math.max(0, 1 - (abs - 2.2) * 1.4) : 1,
+      shade: Math.min(abs, 2.2) * 0.1,
+      z: 50 + Math.round(rel * 10),
     };
   }
   const spacing = 205;
@@ -88,7 +70,6 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
     lastTouch: -Infinity,
     autoBlend: 1,
     tween: null as { from: number; to: number; start: number; duration: number } | null,
-    restSince: 0, // when the stack last came to rest on a card
   });
 
   useEffect(() => {
@@ -112,10 +93,7 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
         if (s.tween) {
           const t = Math.min(1, (now - s.tween.start) / s.tween.duration);
           s.offset = s.tween.from + (s.tween.to - s.tween.from) * easeInOut(t);
-          if (t >= 1) {
-            s.tween = null;
-            s.restSince = now;
-          }
+          if (t >= 1) s.tween = null;
         } else if (Math.abs(s.velocity) > 0.01) {
           s.offset += s.velocity * dt;
           s.velocity *= Math.pow(0.04, dt); // momentum fades out
@@ -124,17 +102,9 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
         }
 
         const idle = now - s.lastTouch > RESUME_AFTER && !s.tween;
-        if (stack) {
-          // Hold on a card, then slide the next one in.
-          s.autoBlend = 0;
-          if (!reduceMotion && idle && s.velocity === 0 && now - s.restSince > STACK_HOLD) {
-            const from = Math.round(s.offset);
-            s.tween = { from: s.offset, to: from - 1, start: now, duration: STACK_MOVE };
-          }
-        } else {
-          s.autoBlend += ((idle ? 1 : 0) - s.autoBlend) * Math.min(1, dt * 2);
-          if (!reduceMotion) s.offset -= AUTO_SPEED * s.autoBlend * dt;
-        }
+        s.autoBlend += ((idle ? 1 : 0) - s.autoBlend) * Math.min(1, dt * 2);
+        // Phone cards travel right → left, laptop cards left → right.
+        if (!reduceMotion) s.offset += (stack ? 1 : -1) * AUTO_SPEED * s.autoBlend * dt;
       }
 
       cardRefs.current.forEach((el, i) => {
@@ -149,7 +119,7 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
     };
     raf = requestAnimationFrame(tick);
 
-    const spacing = () => (isStack(width) ? STACK_CARD * 0.75 : 205);
+    const spacing = () => (isStack(width) ? STACK_SPACING : 205);
     const onDown = (e: PointerEvent) => {
       s.dragging = true;
       s.moved = 0;
@@ -179,12 +149,6 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
       s.lastTouch = performance.now();
       if (performance.now() - s.lastT > 80) s.velocity = 0;
       s.velocity = Math.max(-12, Math.min(12, s.velocity));
-      if (isStack(width)) {
-        // Settle on the nearest card in the swipe direction, so one card always ends up in the middle.
-        const to = Math.round(s.offset + s.velocity * 0.18);
-        s.velocity = 0;
-        s.tween = { from: s.offset, to, start: performance.now(), duration: 520 };
-      }
     };
     stage.addEventListener("pointerdown", onDown);
     stage.addEventListener("pointermove", onMove);
