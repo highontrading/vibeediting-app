@@ -1,14 +1,14 @@
 ---
 title: Install Node.js and FFmpeg
-description: Two free tools that vibeediting uses on your computer.
+description: Two free tools that vibe editing uses on your computer.
 section: Start here
 order: 2
 video:
 ---
 
-vibeediting needs two free tools:
+vibe editing needs two free tools:
 
-- **Node.js** runs the vibeediting MCP.
+- **Node.js** runs the vibe editing MCP.
 - **FFmpeg** is the video engine that does the actual cutting and rendering.
 
 You install them once.

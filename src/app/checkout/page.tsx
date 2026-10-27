@@ -16,7 +16,7 @@ export default function CheckoutPage() {
       <div className="mx-auto grid max-w-5xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1fr_1.1fr] md:py-20">
         <div data-reveal>
           <Label>Checkout</Label>
-          <h1 className="mt-4 font-serif text-6xl leading-[1.02] tracking-[-0.025em]">Get vibeediting</h1>
+          <h1 className="mt-4 font-serif text-6xl leading-[1.02] tracking-[-0.025em]">Get vibe editing</h1>
           <p className="mt-4 text-ink-soft">Your license key appears on screen and in your inbox right after payment.</p>
           {plan && (
             <div className="relative mt-8 rounded-3xl border-[1.5px] border-ink bg-pink p-2">

@@ -78,7 +78,7 @@ export function CheckoutForm({ plans }: { plans: Plan[] }) {
       amount: order.amount,
       currency: order.currency,
       order_id: order.orderId,
-      name: "vibeediting",
+      name: "vibe editing",
       description: `${order.planName} license`,
       prefill: { name: buyer.name, email: buyer.email, contact: buyer.phone },
       theme: { color: "#c6f432" },

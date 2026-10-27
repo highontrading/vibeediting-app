@@ -6,23 +6,23 @@ order: 1
 video:
 ---
 
-Welcome to vibeediting! In about 15 minutes you will have an AI agent on your computer that can edit your videos when you ask it to.
+Welcome to vibe editing! In about 15 minutes you will have an AI agent on your computer that can edit your videos when you ask it to.
 
 ## What you need
 
 | You need | Why |
 |---|---|
 | A **Mac or Windows** computer | Your videos are on your computer, so the editing runs there too |
-| **Claude Code**, **Codex** or **Cursor** | This is the AI agent that will use vibeediting |
+| **Claude Code**, **Codex** or **Cursor** | This is the AI agent that will use vibe editing |
 | A paid plan for that agent | For example Claude Pro, ChatGPT Plus (for Codex) or Cursor Pro |
 | Your **license key** | You got it on screen and by email after buying. It starts with `VIBE-` |
 
-> vibeediting does **not** work in Claude.ai web chat, Claude Code on the web, or on a phone. Those cannot reach the video files on your computer.
+> vibe editing does **not** work in Claude.ai web chat, Claude Code on the web, or on a phone. Those cannot reach the video files on your computer.
 
 ## The 4 steps
 
-1. **[Install Node.js and FFmpeg](/docs/install-requirements).** Two free tools vibeediting needs. 5 minutes.
-2. **Add vibeediting to your AI agent.** Pick one:
+1. **[Install Node.js and FFmpeg](/docs/install-requirements).** Two free tools vibe editing needs. 5 minutes.
+2. **Add vibe editing to your AI agent.** Pick one:
    - [Claude Code](/docs/setup-claude-code)
    - [Codex](/docs/setup-codex)
    - [Cursor](/docs/setup-cursor)
@@ -31,6 +31,6 @@ Welcome to vibeediting! In about 15 minutes you will have an AI agent on your co
 
 ## How it works, in one line
 
-You type what you want → your AI agent decides the steps → it calls vibeediting's tools (cut, caption, render…) → the finished video appears in your folder.
+You type what you want → your AI agent decides the steps → it calls vibe editing's tools (cut, caption, render…) → the finished video appears in your folder.
 
 Stuck at any point? See [Troubleshooting](/docs/troubleshooting) or email us at {{SUPPORT_EMAIL}}.

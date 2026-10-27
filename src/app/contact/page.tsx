@@ -3,7 +3,7 @@ import Link from "next/link";
 import { business } from "@/config/site";
 import { Label } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Contact us", description: "Get in touch with the vibeediting team." };
+export const metadata: Metadata = { title: "Contact us", description: "Get in touch with the vibe editing team." };
 
 export default function ContactPage() {
   const rows = [

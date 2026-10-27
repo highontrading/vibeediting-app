@@ -4,7 +4,7 @@ import { ResendForm } from "@/components/resend-form";
 import { Label } from "@/components/ui";
 import { business } from "@/config/site";
 
-export const metadata: Metadata = { title: "Resend my key", description: "Get your vibeediting license key again." };
+export const metadata: Metadata = { title: "Resend my key", description: "Get your vibe editing license key again." };
 
 const link = "font-semibold underline decoration-pink-deep decoration-2 underline-offset-4";
 

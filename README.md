@@ -1,6 +1,6 @@
 # vibeediting.app
 
-The website that sells the vibeediting MCP: landing page, Razorpay checkout, license keys, tutorials and
+The website that sells the vibe editing MCP: landing page, Razorpay checkout, license keys, tutorials and
 legal pages. The MCP itself lives in a separate repository; see [MCP_INTEGRATION.md](MCP_INTEGRATION.md).
 
 Built with Next.js 16, Tailwind CSS 4, Postgres (Supabase), Razorpay and Resend. Hosted on Vercel.

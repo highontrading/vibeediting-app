@@ -125,7 +125,7 @@ export default function Home() {
         <SectionIntro
           className="px-4"
           icon={<Bolt className="w-5" />}
-          label="Welcome to vibeediting"
+          label="Welcome to vibe editing"
           title="For the overwhelmed creator, the editing-tired founder and the reel-obsessed."
           body="One MCP gives your AI agent the hands to edit. Ask in plain English or Hinglish, and watch it cut, caption and animate your videos."
         />

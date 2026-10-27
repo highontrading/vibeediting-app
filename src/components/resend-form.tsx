@@ -21,7 +21,7 @@ export function ResendForm() {
   if (state === "sent") {
     return (
       <p className="animate-pop-in rounded-2xl border border-ink bg-green px-4 py-3 text-sm">
-        If that email bought vibeediting, the license key is on its way. Check your spam folder too. You can ask
+        If that email bought vibe editing, the license key is on its way. Check your spam folder too. You can ask
         again after 5 minutes.
       </p>
     );

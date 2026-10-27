@@ -5,13 +5,13 @@ description: When and how you can get a refund.
 
 *Last updated: {{LAST_UPDATED}}*
 
-vibeediting is digital software that is delivered instantly, so we cannot "take it back" like a physical product. We still want you to be happy with it.
+vibe editing is digital software that is delivered instantly, so we cannot "take it back" like a physical product. We still want you to be happy with it.
 
 ## When you can get a refund
 
 You can ask for a **full refund within 7 days** of purchase if:
 
-- vibeediting does not work on your computer, **and**
+- vibe editing does not work on your computer, **and**
 - you contacted our support at {{SUPPORT_EMAIL}} and we could not fix the problem.
 
 ## When we cannot refund

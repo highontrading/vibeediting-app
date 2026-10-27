@@ -153,7 +153,7 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
         className="relative h-[400px] cursor-grab touch-pan-y select-none active:cursor-grabbing sm:h-[520px]"
         role="region"
         aria-roledescription="carousel"
-        aria-label="Videos edited with vibeediting. Drag or swipe to spin."
+        aria-label="Videos edited with vibe editing. Drag or swipe to spin."
       >
         {reels.map((reel, i) => (
           <div

@@ -9,19 +9,19 @@ video:
 Your key was added in the install step. Now ask your AI agent:
 
 ```text
-Check my vibeediting license.
+Check my vibe editing license.
 ```
 
 It should reply that the license is **active**, and how many computers are using it.
 
 ## One key, 2 computers
 
-Each key works on **2 computers** (for example your laptop and your desktop). The first time vibeediting runs on a computer, that computer is registered.
+Each key works on **2 computers** (for example your laptop and your desktop). The first time vibe editing runs on a computer, that computer is registered.
 
 **Bought a new laptop?** On the old computer, ask your agent:
 
 ```text
-Deactivate vibeediting on this computer.
+Deactivate vibe editing on this computer.
 ```
 
 This frees the slot for your new computer.

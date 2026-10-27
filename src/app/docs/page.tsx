@@ -5,7 +5,7 @@ import { Label, pastelBg, type Pastel } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Tutorials",
-  description: "Install vibeediting in Claude Code, Codex or Cursor and learn the editing workflows.",
+  description: "Install vibe editing in Claude Code, Codex or Cursor and learn the editing workflows.",
 };
 
 const colors: Pastel[] = ["pink", "blue", "green", "lilac", "butter", "peach"];
@@ -17,7 +17,7 @@ export default function DocsIndex() {
   return (
     <>
       <Label>Tutorials</Label>
-      <h1 className="mt-4 font-serif text-6xl leading-[1.02] tracking-[-0.025em]">Learn vibeediting</h1>
+      <h1 className="mt-4 font-serif text-6xl leading-[1.02] tracking-[-0.025em]">Learn vibe editing</h1>
       <p className="mt-5 max-w-2xl text-ink-soft">
         Start with{" "}
         <Link href="/docs/getting-started" className="font-semibold underline decoration-pink-deep decoration-2 underline-offset-4">

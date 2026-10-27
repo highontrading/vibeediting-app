@@ -42,7 +42,7 @@ export function Pricing() {
                 ))}
               </ul>
               <PillLink href={`/checkout?plan=${plan.id}`} variant="solid" className="mt-8 w-full py-3.5">
-                Get vibeediting
+                Get vibe editing
               </PillLink>
             </div>
           </div>

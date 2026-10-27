@@ -1,6 +1,6 @@
 ---
-title: Add vibeediting to Claude Code
-description: Install Claude Code and connect the vibeediting MCP.
+title: Add vibe editing to Claude Code
+description: Install Claude Code and connect the vibe editing MCP.
 section: Install
 order: 3
 video:
@@ -24,7 +24,7 @@ irm https://claude.ai/install.ps1 | iex
 
 Then type `claude` and log in with your Claude account when asked.
 
-## 2. Add the vibeediting MCP
+## 2. Add the vibe editing MCP
 
 Replace `VIBE-XXXX-XXXX-XXXX-XXXX` with **your** license key, then run the command.
 
@@ -40,7 +40,7 @@ claude mcp add {{SERVER_NAME}} --scope user --env {{LICENSE_ENV}}=VIBE-XXXX-XXXX
 claude mcp add {{SERVER_NAME}} --scope user --env {{LICENSE_ENV}}=VIBE-XXXX-XXXX-XXXX-XXXX -- cmd /c npx -y {{MCP_PACKAGE}}
 ```
 
-`--scope user` makes vibeediting available in every folder, not just one project.
+`--scope user` makes vibe editing available in every folder, not just one project.
 
 ## 3. Check that it is connected
 

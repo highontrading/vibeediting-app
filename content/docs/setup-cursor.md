@@ -1,6 +1,6 @@
 ---
-title: Add vibeediting to Cursor
-description: Use vibeediting from Cursor's agent.
+title: Add vibe editing to Cursor
+description: Use vibe editing from Cursor's agent.
 section: Install
 order: 5
 video:
@@ -10,7 +10,7 @@ video:
 
 Download it from cursor.com and sign in. A paid Cursor plan is recommended for long editing sessions.
 
-## 2. Add the vibeediting MCP
+## 2. Add the vibe editing MCP
 
 1. Open **Cursor Settings → MCP → Add new global MCP server**. This opens the file `mcp.json`.
 2. Paste this, with **your** license key:

@@ -1,6 +1,6 @@
 ---
-title: Add vibeediting to Codex
-description: Use vibeediting with OpenAI's Codex CLI.
+title: Add vibe editing to Codex
+description: Use vibe editing with OpenAI's Codex CLI.
 section: Install
 order: 4
 video:
@@ -16,7 +16,7 @@ npm install -g @openai/codex
 
 Run `codex` once and sign in with your ChatGPT account.
 
-## 2. Add the vibeediting MCP
+## 2. Add the vibe editing MCP
 
 Replace `VIBE-XXXX-XXXX-XXXX-XXXX` with your license key:
 

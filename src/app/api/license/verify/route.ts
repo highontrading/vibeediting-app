@@ -7,7 +7,7 @@ const Body = z.object({
   mcpVersion: z.string().max(32).optional(),
 });
 
-// Called by the vibeediting MCP. See MCP_INTEGRATION.md.
+// Called by the vibe editing MCP. See MCP_INTEGRATION.md.
 export async function POST(request: Request) {
   const parsed = Body.safeParse(await request.json().catch(() => null));
   if (!parsed.success) {

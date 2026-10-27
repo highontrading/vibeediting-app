@@ -3,14 +3,14 @@
 // Items marked TODO must be filled in before going live (Razorpay checks them).
 
 export const site = {
-  name: "vibeediting",
+  name: "vibe editing",
   domain: "vibeediting.app",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://vibeediting.app",
   tagline: "Edit your videos by just talking to your AI.",
   // Logo image (transparent PNG/SVG) shown in the navbar and footer. It is sized by height; the width follows its shape.
   logo: "https://xfyshcjptayuemcwxnpr.supabase.co/storage/v1/object/public/uploads/1793130877165-1e99cefd-c25f-4c6e-8699-071b8e873af5.png",
   description:
-    "vibeediting is an MCP that gives Claude Code, Codex and Cursor real video-editing tools. Cut silences, add captions, B-roll and motion graphics, all on your own computer.",
+    "vibe editing is an MCP that gives Claude Code, Codex and Cursor real video-editing tools. Cut silences, add captions, B-roll and motion graphics, all on your own computer.",
 };
 
 // Shown on the Contact page, legal pages and in emails.
@@ -58,7 +58,7 @@ export const plans: Plan[] = [
     badge: "Launch price",
     description: "Pay once. Use it forever on your own computer.",
     features: [
-      "Full vibeediting MCP with every tool",
+      "Full vibe editing MCP with every tool",
       "All editing workflows and style presets",
       "Step-by-step video tutorials",
       "Works with Claude Code, Codex and Cursor",
@@ -160,7 +160,7 @@ export const steps = [
   },
   {
     title: "Install in 5 minutes",
-    body: "Follow the video tutorial to add the vibeediting MCP to Claude Code, Codex or Cursor.",
+    body: "Follow the video tutorial to add the vibe editing MCP to Claude Code, Codex or Cursor.",
   },
   {
     title: "Talk, and it edits",
@@ -171,7 +171,7 @@ export const steps = [
 export const faqs = [
   {
     q: "What is an MCP?",
-    a: "MCP (Model Context Protocol) is a standard way to give an AI agent new tools. vibeediting is an MCP that gives your AI agent video-editing tools. You add it once to Claude Code, Codex or Cursor, and then you can ask the AI to edit your videos.",
+    a: "MCP (Model Context Protocol) is a standard way to give an AI agent new tools. vibe editing is an MCP that gives your AI agent video-editing tools. You add it once to Claude Code, Codex or Cursor, and then you can ask the AI to edit your videos.",
   },
   {
     q: "Do I need to know coding?",
@@ -183,7 +183,7 @@ export const faqs = [
   },
   {
     q: "Do I need a Claude, ChatGPT or Cursor subscription?",
-    a: "Yes. vibeediting runs inside your AI agent, so you need your own plan for it (for example Claude Pro, ChatGPT Plus for Codex, or Cursor Pro). That is paid separately to them. Long editing sessions use more of your plan's limits.",
+    a: "Yes. vibe editing runs inside your AI agent, so you need your own plan for it (for example Claude Pro, ChatGPT Plus for Codex, or Cursor Pro). That is paid separately to them. Long editing sessions use more of your plan's limits.",
   },
   {
     q: "Does it work on Claude.ai in the browser, or on my phone?",

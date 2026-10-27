@@ -17,7 +17,7 @@ Use my brand colours.
 
 ## Free stock footage
 
-vibeediting can search **Pexels** and **Pixabay** for free stock clips.
+vibe editing can search **Pexels** and **Pixabay** for free stock clips.
 
 1. Get a free API key at pexels.com/api (and/or pixabay.com/api/docs).
 2. Add it to your MCP setup the same way you added your license key, as `PEXELS_API_KEY` (and `PIXABAY_API_KEY`).
@@ -29,6 +29,6 @@ Add 3 seconds of stock B-roll of "busy Mumbai street" when I talk about city lif
 
 > Stock clips are free to use under the Pexels and Pixabay licenses. Do not use stock footage of recognizable people in a way that suggests they endorse you. Always use music you have the rights to.
 
-## What vibeediting does not do (yet)
+## What vibe editing does not do (yet)
 
 We do **not** generate AI video (like Sora or Veo). All B-roll is either motion graphics made as code or real stock footage.

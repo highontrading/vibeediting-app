@@ -1,10 +1,10 @@
-# Prompt: build the vibeediting MCP
+# Prompt: build the vibe editing MCP
 
 Copy everything below the line into a new Claude Code session, in the new (empty) repository for the MCP.
 
 ---
 
-You are building **vibeediting**, a commercial MCP server that lets people edit their videos by talking to the AI agent they already use: Claude Code, Codex, Cursor or any other MCP client. This repository is only the MCP. The sales website (vibeediting.app) already exists in another repository. Read this whole brief first. Then reply with a short plan, your stack choices and any questions, and **wait for my go-ahead before writing code**.
+You are building **vibe editing**, a commercial MCP server that lets people edit their videos by talking to the AI agent they already use: Claude Code, Codex, Cursor or any other MCP client. This repository is only the MCP. The sales website (vibeediting.app) already exists in another repository. Read this whole brief first. Then reply with a short plan, your stack choices and any questions, and **wait for my go-ahead before writing code**.
 
 ## 1. The product
 
@@ -33,16 +33,16 @@ The tutorials tell users to install like this:
 
 ```bash
 # Claude Code (Mac)
-claude mcp add vibeediting --scope user --env VIBE_LICENSE_KEY=VIBE-XXXX-XXXX-XXXX-XXXX -- npx -y @vibeediting/mcp
+claude mcp add vibe editing --scope user --env VIBE_LICENSE_KEY=VIBE-XXXX-XXXX-XXXX-XXXX -- npx -y @vibeediting/mcp
 # Claude Code (Windows)
-claude mcp add vibeediting --scope user --env VIBE_LICENSE_KEY=VIBE-XXXX-XXXX-XXXX-XXXX -- cmd /c npx -y @vibeediting/mcp
+claude mcp add vibe editing --scope user --env VIBE_LICENSE_KEY=VIBE-XXXX-XXXX-XXXX-XXXX -- cmd /c npx -y @vibeediting/mcp
 # Codex
-codex mcp add vibeediting --env VIBE_LICENSE_KEY=VIBE-XXXX-XXXX-XXXX-XXXX -- npx -y @vibeediting/mcp
+codex mcp add vibe editing --env VIBE_LICENSE_KEY=VIBE-XXXX-XXXX-XXXX-XXXX -- npx -y @vibeediting/mcp
 ```
 
 Cursor uses `mcp.json` with `command: "npx"`, `args: ["-y", "@vibeediting/mcp"]` and `env: { VIBE_LICENSE_KEY }`.
 
-The tutorials also tell users to say **"Check my vibeediting license"** and **"Deactivate vibeediting on this computer"**. The website's marketing shows these tool names, so keep them: `analyze_video`, `cut_silences`, `add_captions`, `render_motion_graphic`, `export_video`, `check_license`, `deactivate_this_computer`.
+The tutorials also tell users to say **"Check my vibe editing license"** and **"Deactivate vibe editing on this computer"**. The website's marketing shows these tool names, so keep them: `analyze_video`, `cut_silences`, `add_captions`, `render_motion_graphic`, `export_video`, `check_license`, `deactivate_this_computer`.
 
 ### License API (already built on the website)
 

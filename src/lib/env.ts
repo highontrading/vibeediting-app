@@ -12,5 +12,5 @@ export const env = {
   razorpayKeySecret: () => required("RAZORPAY_KEY_SECRET"),
   razorpayWebhookSecret: () => required("RAZORPAY_WEBHOOK_SECRET"),
   resendApiKey: () => process.env.RESEND_API_KEY,
-  emailFrom: () => process.env.EMAIL_FROM ?? "vibeediting <hello@vibeediting.app>",
+  emailFrom: () => process.env.EMAIL_FROM ?? "vibe editing <hello@vibeediting.app>",
 };

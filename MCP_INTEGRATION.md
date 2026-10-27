@@ -1,4 +1,4 @@
-# License API: contract for the vibeediting MCP
+# License API: contract for the vibe editing MCP
 
 This website sells license keys. The MCP (built in a separate repository) must check the key with this
 website. Give this file to the Claude Code session that builds the MCP.
@@ -38,7 +38,7 @@ HTTP 400 `{ "valid": false, "reason": "bad_request" }` for a malformed body, and
 
 ## `POST https://vibeediting.app/api/license/deactivate`
 
-Frees the slot for the current computer (for a "deactivate vibeediting on this computer" tool).
+Frees the slot for the current computer (for a "deactivate vibe editing on this computer" tool).
 
 Body: `{ "licenseKey": "...", "machineId": "..." }` → `{ "ok": true }` if a slot was freed, `{ "ok": false }` otherwise.
 

@@ -5,7 +5,7 @@ import { sendLicenseEmail } from "@/lib/email";
 const Body = z.object({ email: z.email().max(200) });
 
 // "Lost my key" form. Always gives the same answer so it cannot be used to
-// check whether an email address bought vibeediting.
+// check whether an email address bought vibe editing.
 export async function POST(request: Request) {
   const parsed = Body.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return Response.json({ error: "Enter a valid email." }, { status: 400 });

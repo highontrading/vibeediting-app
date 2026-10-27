@@ -41,7 +41,7 @@ export function SiteFooter() {
             <Logo size="lg" />
             <p className="mt-4 text-sm leading-relaxed text-ink-soft">{site.tagline}</p>
             <PillLink href="/checkout" className="mt-6">
-              Get vibeediting
+              Get vibe editing
             </PillLink>
           </div>
           {columns.map((col) => (
@@ -67,7 +67,7 @@ export function SiteFooter() {
             </a>
           </p>
           <p className="max-w-xl md:text-right">
-            vibeediting is independent and not affiliated with Anthropic, OpenAI, Anysphere (Cursor), Adobe or Blackmagic
+            vibe editing is independent and not affiliated with Anthropic, OpenAI, Anysphere (Cursor), Adobe or Blackmagic
             Design. All product names are trademarks of their owners.
           </p>
         </div>
