@@ -3,21 +3,63 @@
 import { useEffect, useRef } from "react";
 import type { HeroReel } from "@/config/site";
 
-// Cards sit on a gentle arch. `offset` is measured in cards: it drifts on its own
-// (cards travel left → right), and dragging or swiping spins it with momentum.
-const AUTO_SPEED = 0.22; // cards per second
-const RESUME_AFTER = 1600; // ms of no touching before the auto drift comes back
+// Laptop/tablet: cards sit on a gentle arch and drift left → right continuously.
+// Phone: a stack. One card sits in the middle, its neighbours tucked behind it; every few
+// seconds the next card swings out from behind and slides over the middle one.
+// `offset` is measured in cards; dragging or swiping moves it in both layouts.
+const AUTO_SPEED = 0.22; // arch: cards per second
+const RESUME_AFTER = 1600; // ms of no touching before the automatic movement comes back
+const STACK_HOLD = 1700; // stack: ms each card stays in the middle
+const STACK_MOVE = 1000; // stack: ms for the next card to slide in
+const BUTTON_MOVE = 600; // ms for the arrow buttons
+
+const isStack = (width: number) => width < 640;
+
+// Smoothly interpolates between keyframes [a, value] (eased between each pair).
+function keyframes(points: [number, number][], a: number) {
+  if (a <= points[0][0]) return points[0][1];
+  for (let i = 1; i < points.length; i++) {
+    const [a1, v1] = points[i];
+    if (a <= a1) {
+      const [a0, v0] = points[i - 1];
+      const t = (a - a0) / (a1 - a0);
+      return v0 + (v1 - v0) * t * t * (3 - 2 * t);
+    }
+  }
+  return points[points.length - 1][1];
+}
+
+const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+const STACK_CARD = 200; // px, must match the phone card width below
 
 function layout(rel: number, width: number) {
-  const mobile = width < 640;
-  const spacing = mobile ? 150 : 205;
   const abs = Math.abs(rel);
-  const x = rel * spacing * (1 - Math.min(abs, 4) * 0.035);
-  const y = abs * abs * (mobile ? 9 : 12);
-  const rotate = rel * (mobile ? 5 : 6);
-  const scale = 1 - Math.min(abs, 4) * 0.07;
-  const opacity = abs > 3.6 ? Math.max(0, 1 - (abs - 3.6) * 1.5) : 1;
-  return { x, y, rotate, scale, opacity, z: 100 - Math.round(abs * 10) };
+  const side = Math.sign(rel);
+  if (isStack(width)) {
+    // At abs 0.5 (half way through a change) the two cards are side by side, so the one on top
+    // can switch without any flicker; at abs 1 a card is tucked behind the middle one.
+    const x = side * STACK_CARD * keyframes([[0, 0], [0.5, 0.47], [1, 0.34], [2, 0.6], [3, 0.78]], abs);
+    return {
+      x,
+      y: keyframes([[0, 0], [0.5, 8], [1, 14], [2, 26], [3, 36]], abs),
+      rotate: side * keyframes([[0, 0], [0.5, 4], [1, 6], [2, 9], [3, 11]], abs),
+      scale: keyframes([[0, 1], [0.5, 0.93], [1, 0.86], [2, 0.76], [3, 0.68]], abs),
+      opacity: keyframes([[2, 1], [2.8, 0]], abs),
+      shade: keyframes([[0, 0], [1, 0.16], [2, 0.3]], abs),
+      z: 100 - Math.round(abs * 10),
+    };
+  }
+  const spacing = 205;
+  return {
+    x: rel * spacing * (1 - Math.min(abs, 4) * 0.035),
+    y: abs * abs * 12,
+    rotate: rel * 6,
+    scale: 1 - Math.min(abs, 4) * 0.07,
+    opacity: abs > 3.6 ? Math.max(0, 1 - (abs - 3.6) * 1.5) : 1,
+    shade: 0,
+    z: 100 - Math.round(abs * 10),
+  };
 }
 
 function wrap(value: number, count: number) {
@@ -28,8 +70,8 @@ function styleFor(rel: number, width: number, bob = 0) {
   const l = layout(rel, width);
   return {
     transform: `translate3d(calc(-50% + ${l.x}px), ${l.y + bob}px, 0) rotate(${l.rotate}deg) scale(${l.scale})`,
-    opacity: l.opacity,
-    zIndex: l.z,
+    opacity: String(l.opacity),
+    zIndex: String(l.z),
   };
 }
 
@@ -45,7 +87,8 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
     lastT: 0,
     lastTouch: -Infinity,
     autoBlend: 1,
-    target: null as number | null, // set by the arrow buttons
+    tween: null as { from: number; to: number; start: number; duration: number } | null,
+    restSince: 0, // when the stack last came to rest on a card
   });
 
   useEffect(() => {
@@ -63,14 +106,15 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
     const tick = (now: number) => {
       const dt = Math.min(0.05, (now - prev) / 1000);
       prev = now;
+      const stack = isStack(width);
 
       if (!s.dragging) {
-        if (s.target !== null) {
-          const diff = s.target - s.offset;
-          s.offset += diff * Math.min(1, dt * 8);
-          if (Math.abs(diff) < 0.002) {
-            s.offset = s.target;
-            s.target = null;
+        if (s.tween) {
+          const t = Math.min(1, (now - s.tween.start) / s.tween.duration);
+          s.offset = s.tween.from + (s.tween.to - s.tween.from) * easeInOut(t);
+          if (t >= 1) {
+            s.tween = null;
+            s.restSince = now;
           }
         } else if (Math.abs(s.velocity) > 0.01) {
           s.offset += s.velocity * dt;
@@ -78,26 +122,38 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
         } else {
           s.velocity = 0;
         }
-        const idle = now - s.lastTouch > RESUME_AFTER && s.target === null;
-        s.autoBlend += ((idle ? 1 : 0) - s.autoBlend) * Math.min(1, dt * 2);
-        if (!reduceMotion) s.offset -= AUTO_SPEED * s.autoBlend * dt;
+
+        const idle = now - s.lastTouch > RESUME_AFTER && !s.tween;
+        if (stack) {
+          // Hold on a card, then slide the next one in.
+          s.autoBlend = 0;
+          if (!reduceMotion && idle && s.velocity === 0 && now - s.restSince > STACK_HOLD) {
+            const from = Math.round(s.offset);
+            s.tween = { from: s.offset, to: from - 1, start: now, duration: STACK_MOVE };
+          }
+        } else {
+          s.autoBlend += ((idle ? 1 : 0) - s.autoBlend) * Math.min(1, dt * 2);
+          if (!reduceMotion) s.offset -= AUTO_SPEED * s.autoBlend * dt;
+        }
       }
 
       cardRefs.current.forEach((el, i) => {
         if (!el) return;
         const rel = wrap(i - s.offset, count);
-        const bob = reduceMotion ? 0 : Math.sin(now / 900 + i * 1.7) * 6;
+        const bob = reduceMotion ? 0 : Math.sin(now / 900 + i * 1.7) * (stack ? 3 : 6);
         Object.assign(el.style, styleFor(rel, width, bob));
+        const shade = el.querySelector<HTMLElement>("[data-shade]");
+        if (shade) shade.style.opacity = String(layout(rel, width).shade);
       });
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
 
-    const spacing = () => (width < 640 ? 150 : 205);
+    const spacing = () => (isStack(width) ? STACK_CARD * 0.75 : 205);
     const onDown = (e: PointerEvent) => {
       s.dragging = true;
       s.moved = 0;
-      s.target = null;
+      s.tween = null;
       s.velocity = 0;
       s.lastX = e.clientX;
       s.lastT = performance.now();
@@ -123,6 +179,12 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
       s.lastTouch = performance.now();
       if (performance.now() - s.lastT > 80) s.velocity = 0;
       s.velocity = Math.max(-12, Math.min(12, s.velocity));
+      if (isStack(width)) {
+        // Settle on the nearest card in the swipe direction, so one card always ends up in the middle.
+        const to = Math.round(s.offset + s.velocity * 0.18);
+        s.velocity = 0;
+        s.tween = { from: s.offset, to, start: performance.now(), duration: 520 };
+      }
     };
     stage.addEventListener("pointerdown", onDown);
     stage.addEventListener("pointermove", onMove);
@@ -141,19 +203,20 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
 
   const step = (dir: 1 | -1) => {
     const s = state.current;
+    const now = performance.now();
     s.velocity = 0;
-    s.lastTouch = performance.now();
-    s.target = Math.round(s.target ?? s.offset) + dir;
+    s.lastTouch = now;
+    s.tween = { from: s.offset, to: Math.round(s.tween?.to ?? s.offset) + dir, start: now, duration: BUTTON_MOVE };
   };
 
   return (
     <div className="relative">
       <div
         ref={stageRef}
-        className="relative h-[400px] cursor-grab touch-pan-y select-none active:cursor-grabbing sm:h-[520px]"
+        className="relative h-[430px] cursor-grab touch-pan-y select-none active:cursor-grabbing sm:h-[520px]"
         role="region"
         aria-roledescription="carousel"
-        aria-label="Videos edited with vibe editing. Drag or swipe to spin."
+        aria-label="Videos edited with vibe editing. Swipe or drag to browse."
       >
         {reels.map((reel, i) => (
           <div
@@ -161,7 +224,7 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
             ref={(el) => {
               cardRefs.current[i] = el;
             }}
-            className="absolute top-6 left-1/2 w-[168px] origin-bottom will-change-transform sm:w-[228px]"
+            className="absolute top-6 left-1/2 w-[200px] origin-bottom will-change-transform sm:w-[228px]"
             // Same position the first animation frame computes, so there is no jump on load.
             style={styleFor(wrap(i, reels.length), 1200)}
           >
@@ -179,7 +242,10 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
         >
           ←
         </button>
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-mute">drag to spin</span>
+        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-mute">
+          <span className="sm:hidden">swipe</span>
+          <span className="hidden sm:inline">drag to spin</span>
+        </span>
         <button
           type="button"
           onClick={() => step(1)}
@@ -207,6 +273,8 @@ function ReelCard({ reel }: { reel: HeroReel }) {
         preload="metadata"
         draggable={false}
       />
+      {/* Darkens cards behind the middle one on phones */}
+      <span data-shade aria-hidden className="pointer-events-none absolute inset-0 bg-ink opacity-0" />
     </div>
   );
 }
