@@ -4,11 +4,16 @@ import { useEffect, useRef } from "react";
 import type { HeroReel } from "@/config/site";
 
 // Laptop/tablet: cards sit on a gentle arch and drift left → right.
-// Phone: cards overlap like a fanned deck and drift right → left. Each card coming in from the
-// right slides over the one in the middle; the stacking order never flips, so nothing jumps.
+// Phone: cards drift right → left. The middle card is shown in full on top, with its neighbours
+// tucked behind it on both sides. Cards glide quickly between slots and ease into the middle,
+// and two cards only swap which is on top while they are side by side, so nothing flickers.
 // Both drift continuously; dragging or swiping moves them freely, with momentum.
 // `offset` is measured in cards.
-const AUTO_SPEED = 0.22; // cards per second
+const AUTO_SPEED = 0.22; // laptop: cards per second
+// Phone: average speed, and how much it eases off while a card is in the centre (0 = constant
+// speed, closer to 1 = longer pause in the centre). It never fully stops.
+const PHONE_SPEED = 0.3;
+const PHONE_EASE = 0.72;
 const RESUME_AFTER = 1600; // ms of no touching before the automatic movement comes back
 const BUTTON_MOVE = 600; // ms for the arrow buttons
 
@@ -16,20 +21,24 @@ const isStack = (width: number) => width < 640;
 
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-const STACK_SPACING = 108; // px between phone cards (cards are 200px wide, so they overlap)
+const STACK_CARD = 200; // px, must match the phone card width below
 
 function layout(rel: number, width: number) {
   const abs = Math.abs(rel);
   if (isStack(width)) {
-    // Cards further right sit on top, so an incoming card always covers the middle one.
+    const side = Math.sign(rel);
+    // `near` rises smoothly from 0 (card in the centre) to 1 (card tucked to the side). It is flat
+    // at the centre, so each card glides in, lingers briefly in full view and glides out, with no
+    // stops anywhere else. At abs 0.5, when two cards swap which is on top, they don't overlap.
+    const near = 1 - Math.exp(-((abs / 0.42) ** 2));
     return {
-      x: rel * STACK_SPACING * (1 - Math.min(abs, 3) * 0.06),
-      y: abs * abs * 7,
-      rotate: rel * 4,
-      scale: 1 - Math.min(abs, 3) * 0.07,
-      opacity: abs > 2.2 ? Math.max(0, 1 - (abs - 2.2) * 1.4) : 1,
-      shade: Math.min(abs, 2.2) * 0.1,
-      z: 50 + Math.round(rel * 10),
+      x: side * STACK_CARD * (0.56 * near + 0.06 * abs),
+      y: 10 * near + 8 * abs,
+      rotate: side * (4 * near + 3 * abs),
+      scale: 1 - 0.18 * near - 0.04 * abs,
+      opacity: abs > 2 ? Math.max(0, 1 - (abs - 2) * 1.4) : 1,
+      shade: 0.12 * near + 0.07 * Math.max(0, abs - 1),
+      z: 100 - Math.round(abs * 10),
     };
   }
   const spacing = 205;
@@ -103,8 +112,15 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
 
         const idle = now - s.lastTouch > RESUME_AFTER && !s.tween;
         s.autoBlend += ((idle ? 1 : 0) - s.autoBlend) * Math.min(1, dt * 2);
-        // Phone cards travel right → left, laptop cards left → right.
-        if (!reduceMotion) s.offset += (stack ? 1 : -1) * AUTO_SPEED * s.autoBlend * dt;
+        if (!reduceMotion) {
+          if (stack) {
+            // Right → left, slowest while a card is centred (offset near a whole number).
+            const ease = 1 - PHONE_EASE * Math.cos(2 * Math.PI * (s.offset - Math.floor(s.offset)));
+            s.offset += PHONE_SPEED * ease * s.autoBlend * dt;
+          } else {
+            s.offset -= AUTO_SPEED * s.autoBlend * dt; // left → right
+          }
+        }
       }
 
       cardRefs.current.forEach((el, i) => {
@@ -119,7 +135,7 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
     };
     raf = requestAnimationFrame(tick);
 
-    const spacing = () => (isStack(width) ? STACK_SPACING : 205);
+    const spacing = () => (isStack(width) ? 150 : 205);
     const onDown = (e: PointerEvent) => {
       s.dragging = true;
       s.moved = 0;
