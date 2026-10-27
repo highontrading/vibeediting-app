@@ -8,7 +8,7 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://vibeediting.app",
   tagline: "Edit your videos by just talking to your AI.",
   // Logo image (transparent PNG/SVG) shown in the navbar and footer. It is sized by height; the width follows its shape.
-  logo: "https://xfyshcjptayuemcwxnpr.supabase.co/storage/v1/object/public/uploads/1793130502423-7c08f075-5c5c-46a3-9b66-340a3290a6dc.png",
+  logo: "https://xfyshcjptayuemcwxnpr.supabase.co/storage/v1/object/public/uploads/1793130877165-1e99cefd-c25f-4c6e-8699-071b8e873af5.png",
   description:
     "vibeediting is an MCP that gives Claude Code, Codex and Cursor real video-editing tools. Cut silences, add captions, B-roll and motion graphics, all on your own computer.",
 };
