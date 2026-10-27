@@ -59,7 +59,7 @@ export function SiteHeader() {
           scrolled || open ? "shadow-hard" : ""
         }`}
       >
-        <div className="flex items-center border-r border-ink px-4 sm:px-5">
+        <div className="flex min-w-0 max-w-[190px] items-center border-r border-ink px-3 sm:max-w-[250px] sm:px-5 lg:max-w-[300px]">
           <Logo />
         </div>
         <nav className="hidden flex-1 items-center justify-end gap-7 pr-6 font-mono text-[11px] uppercase tracking-[0.16em] lg:flex">
@@ -73,8 +73,8 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="ml-auto flex items-center gap-2 px-3 lg:ml-0">
-          <PillLink href="/checkout" className="px-4 py-2.5">
+        <div className="ml-auto flex shrink-0 items-center gap-2 px-3 lg:ml-0">
+          <PillLink href="/checkout" className="px-4 py-2.5 whitespace-nowrap">
             Buy now
           </PillLink>
           <button
