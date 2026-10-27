@@ -76,20 +76,6 @@ export function Cursor({ className, style }: P) {
   );
 }
 
-// Brand mark: an ink flower with a play button in the middle.
-export function FlowerMark({ className, style }: P) {
-  const petals = Array.from({ length: 8 }, (_, i) => i * 45);
-  return (
-    <svg viewBox="0 0 64 64" className={className} style={style} aria-hidden>
-      {petals.map((deg) => (
-        <ellipse key={deg} cx="32" cy="15" rx="8.5" ry="13" fill="#1f1d1b" transform={`rotate(${deg} 32 32)`} />
-      ))}
-      <circle cx="32" cy="32" r="12" fill="#1f1d1b" />
-      <path d="M28.5 25.5v13l10.5-6.5z" fill="#d6f5a2" />
-    </svg>
-  );
-}
-
 // Round badge with text spinning around a smiley. Pass a position class (relative/absolute) in className.
 export function SpinBadge({ className, text = "edit · vibe · post · repeat · " }: P & { text?: string }) {
   return (
