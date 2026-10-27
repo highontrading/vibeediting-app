@@ -11,7 +11,7 @@ export function Logo({ size = "md" }: { size?: "md" | "lg" }) {
       <img
         src={site.logo}
         alt="vibe editing"
-        className={`block w-auto object-contain ${lg ? "h-14 max-w-[260px] sm:h-16" : "h-11 max-w-full sm:h-[52px] lg:h-14"}`}
+        className={`block w-auto object-contain ${lg ? "h-20 max-w-full sm:h-24" : "h-11 max-w-full sm:h-[52px] lg:h-14"}`}
         decoding="async"
         fetchPriority={lg ? "auto" : "high"}
       />
