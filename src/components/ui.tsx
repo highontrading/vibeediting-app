@@ -81,7 +81,7 @@ export function SectionIntro({
         {icon}
         <Label>{label}</Label>
       </div>
-      <h2 className="mt-5 font-serif text-4xl leading-[1.05] tracking-[-0.02em] text-balance sm:text-5xl">{title}</h2>
+      <h2 className="mt-5 font-display font-medium text-4xl leading-[1.05] tracking-[-0.03em] text-balance sm:text-5xl">{title}</h2>
       {body && (
         <p className="mx-auto mt-5 max-w-xl font-mono text-[14px] leading-relaxed text-pretty text-ink-soft">{body}</p>
       )}
@@ -91,7 +91,7 @@ export function SectionIntro({
 
 export function SerifHeading({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <h2 className={`font-serif text-5xl leading-[1.02] tracking-[-0.025em] text-balance sm:text-6xl ${className}`}>
+    <h2 className={`font-display font-medium text-5xl leading-[1.02] tracking-[-0.035em] text-balance sm:text-6xl ${className}`}>
       {children}
     </h2>
   );

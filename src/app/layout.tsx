@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "@fontsource-variable/newsreader/opsz.css";
-import "@fontsource-variable/newsreader/opsz-italic.css";
+import "@fontsource-variable/inter/opsz.css";
+import "@fontsource-variable/inter/opsz-italic.css";
 import "@fontsource-variable/plus-jakarta-sans/wght.css";
 import "@fontsource/dm-mono/400.css";
 import "@fontsource/dm-mono/500.css";

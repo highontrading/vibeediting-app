@@ -14,7 +14,7 @@ export function LegalPage({ slug }: { slug: string }) {
   return (
     <article className="mx-auto max-w-3xl px-4 py-14 sm:px-6 md:py-20">
       <Label>Legal</Label>
-      <h1 className="mt-4 font-serif text-5xl leading-[1.04] tracking-[-0.025em] sm:text-6xl">{doc.title}</h1>
+      <h1 className="mt-4 font-display font-medium text-5xl leading-[1.04] tracking-[-0.035em] sm:text-6xl">{doc.title}</h1>
       <div data-reveal className="mt-8 rounded-3xl border border-ink bg-paper px-6 py-4 sm:px-10 sm:py-6">
         <Markdown>{doc.body}</Markdown>
       </div>

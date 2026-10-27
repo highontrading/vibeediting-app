@@ -70,7 +70,7 @@ export default function Home() {
           <ChatBubble className="animate-float absolute top-6 right-[6%] w-12 [animation-delay:-2s] sm:w-16" style={floatR(8)} />
           <Sparkle className="animate-float absolute top-[46%] left-[4%] hidden w-10 [animation-delay:-1s] md:block" />
 
-          <h1 data-reveal className="mx-auto max-w-4xl font-serif text-[42px] leading-[1.04] tracking-[-0.025em] text-balance sm:text-6xl lg:text-[76px]">
+          <h1 data-reveal className="mx-auto max-w-4xl font-display font-medium text-[40px] leading-[1.04] tracking-[-0.035em] text-balance sm:text-6xl lg:text-[76px]">
             Edit your videos by just talking. Meet your new <span className="highlight">AI video editor</span>.
           </h1>
           <p data-reveal style={{ "--reveal-delay": "120ms" } as React.CSSProperties} className="mx-auto mt-6 max-w-xl font-mono text-[14.5px] leading-relaxed text-pretty sm:text-[15.5px]">
@@ -182,13 +182,13 @@ export default function Home() {
           <div data-reveal className="mt-14 rounded-[32px] border-[1.5px] border-ink bg-lime p-6 sm:p-10 lg:p-14">
             <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
               <div>
-                <h3 className="font-serif text-4xl leading-[1.05] tracking-[-0.02em] sm:text-5xl">Three steps to your first reel</h3>
+                <h3 className="font-display font-medium text-4xl leading-[1.05] tracking-[-0.03em] sm:text-5xl">Three steps to your first reel</h3>
                 <p className="mt-4 font-mono text-[14px] leading-relaxed">No new app to learn. You keep the AI you already have.</p>
                 <ol className="mt-8 space-y-3">
                   {steps.map((step, i) => (
                     <li key={step.title} className="flex gap-4 rounded-2xl border-[1.5px] border-ink bg-paper p-4">
                       <span
-                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink font-serif text-xl ${
+                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink font-display font-medium text-xl ${
                           pastelBg[(["pink", "blue", "lilac"] as const)[i % 3]]
                         }`}
                       >
@@ -228,7 +228,7 @@ export default function Home() {
                 className={`rounded-2xl border-[1.5px] border-ink p-1.5 shadow-hard transition-transform hover:rotate-0 ${a.rotate} ${pastelBg[a.color]}`}
               >
                 <div className="h-full rounded-xl border border-dashed border-ink/50 p-6">
-                  <h3 className="font-serif text-3xl leading-[1.05] tracking-[-0.02em]">{a.title}</h3>
+                  <h3 className="font-display font-medium text-3xl leading-[1.05] tracking-[-0.03em]">{a.title}</h3>
                   <p className="mt-3 font-mono text-[13.5px] leading-relaxed text-ink-soft">{a.body}</p>
                 </div>
               </div>
@@ -275,7 +275,7 @@ export default function Home() {
         <Clapper className="animate-float absolute right-[7%] bottom-14 hidden w-16 [animation-delay:-2s] sm:block" style={floatR(10)} />
         <div data-reveal className="relative mx-auto flex max-w-4xl flex-col items-center px-4 pt-24 pb-28 text-center sm:px-6">
           <Label className="text-ink">Ready when you are</Label>
-          <h2 className="mt-6 font-serif text-[52px] leading-[1] tracking-[-0.03em] text-balance sm:text-7xl lg:text-8xl">
+          <h2 className="mt-6 font-display font-medium text-[52px] leading-[1] tracking-[-0.03em] text-balance sm:text-7xl lg:text-8xl">
             Stop editing. <span className="italic">Start vibing.</span>
           </h2>
           <div className="mt-10 flex flex-wrap justify-center gap-4">

@@ -6,7 +6,7 @@ export default function NotFound() {
     <section className="bg-paper-grid -mt-20 flex flex-col items-center px-4 pt-48 pb-32 text-center">
       <Scissors className="animate-float w-16" />
       <p className="mt-6 font-mono text-xs uppercase tracking-[0.18em]">404 · clip not found</p>
-      <h1 className="mt-4 max-w-xl font-serif text-5xl leading-[1.04] tracking-[-0.025em]">
+      <h1 className="mt-4 max-w-xl font-display font-medium text-5xl leading-[1.04] tracking-[-0.035em]">
         This page was cut from the timeline
       </h1>
       <PillLink href="/" className="mt-9">

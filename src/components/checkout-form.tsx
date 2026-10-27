@@ -206,7 +206,7 @@ function Success({ licenseKey, email }: { licenseKey: string; email: string }) {
       <span className="inline-block rounded-full border border-ink bg-green px-3 py-1 font-mono text-[11px] uppercase tracking-wider">
         ✓ Payment successful
       </span>
-      <h2 className="mt-4 font-serif text-5xl leading-none tracking-tight">Welcome aboard!</h2>
+      <h2 className="mt-4 font-display font-medium text-5xl leading-none tracking-tight">Welcome aboard!</h2>
       <p className="mt-3 text-sm text-ink-soft">This is your license key. We also emailed it to {email}.</p>
       <div className="mt-6 flex items-center justify-center gap-3 rounded-2xl border border-dashed border-ink bg-butter p-4">
         <code className="font-mono text-lg font-bold tracking-wider break-all">{licenseKey}</code>

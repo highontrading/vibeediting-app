@@ -85,7 +85,7 @@ const visuals: Record<Feature["visual"], React.ReactNode> = {
   ),
   style: (
     <div className="flex items-center gap-4">
-      <span className="font-serif text-6xl leading-none">Aa</span>
+      <span className="font-display font-medium text-6xl leading-none">Aa</span>
       <div className="grid grid-cols-2 gap-1.5">
         {["bg-pink", "bg-butter", "bg-ink", "bg-blue"].map((c) => (
           <span key={c} className={`h-7 w-7 rounded-full border border-ink ${c}`} />

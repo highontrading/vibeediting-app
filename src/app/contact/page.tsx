@@ -16,7 +16,7 @@ export default function ContactPage() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-14 sm:px-6 md:py-20">
       <Label>Contact</Label>
-      <h1 className="mt-4 font-serif text-6xl leading-[1.02] tracking-[-0.025em]">Say hello</h1>
+      <h1 className="mt-4 font-display font-medium text-6xl leading-[1.02] tracking-[-0.035em]">Say hello</h1>
       <p className="mt-5 text-ink-soft">
         Need help with setup, your license key or a payment? Email us and we will reply within 24 hours (Monday to
         Saturday). For setup problems, please check{" "}

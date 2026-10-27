@@ -18,10 +18,10 @@ export function Pricing() {
             {plan.badge && <Tag color="butter" className="absolute -top-4 left-6 -rotate-3">{plan.badge}</Tag>}
             <Heart className="animate-float absolute -top-5 -right-4 w-11" />
             <div className="rounded-[18px] border border-dashed border-ink/50 bg-paper p-7">
-              <h3 className="font-serif text-4xl leading-none tracking-tight">{plan.name}</h3>
+              <h3 className="font-display font-medium text-4xl leading-none tracking-tight">{plan.name}</h3>
               <p className="mt-2 text-sm text-ink-soft">{plan.description}</p>
               <p className="mt-6 flex items-baseline gap-3">
-                <span className="font-serif text-7xl leading-none tracking-[-0.03em]">{formatInr(plan.priceInr)}</span>
+                <span className="font-display font-medium text-7xl leading-none tracking-[-0.03em]">{formatInr(plan.priceInr)}</span>
                 {plan.compareAtInr && (
                   <span className="text-xl text-ink-mute line-through decoration-pink-deep decoration-2">
                     {formatInr(plan.compareAtInr)}
@@ -56,7 +56,7 @@ export function Pricing() {
           <ul className="mt-5 space-y-4">
             {needs.map(([title, body], i) => (
               <li key={title} className="flex gap-3">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-ink bg-paper font-serif">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-ink bg-paper font-display font-medium">
                   {i + 1}
                 </span>
                 <span>

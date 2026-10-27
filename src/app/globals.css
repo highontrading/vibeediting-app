@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Design system: cream graph paper, ink outlines, pastel blocks with hard offset shadows,
-   Newsreader serif headlines, DM Mono for labels and prompts, Plus Jakarta Sans for reading text. */
+   Inter Display headlines, DM Mono for labels and prompts, Plus Jakarta Sans for reading text. */
 @theme {
   --color-cream: #fbf8f1;
   --color-paper: #fffdf8;
@@ -18,7 +18,7 @@
   --color-butter: #fde7a8;
   --color-peach: #f8cbb3;
 
-  --font-serif: "Newsreader Variable", ui-serif, Georgia, serif;
+  --font-display: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "DM Mono", ui-monospace, monospace;
 
@@ -59,6 +59,12 @@ body {
     linear-gradient(to right, rgb(255 255 255 / 0.45) 1px, transparent 1px),
     linear-gradient(to bottom, rgb(255 255 255 / 0.45) 1px, transparent 1px);
   background-size: 22px 22px;
+}
+
+/* Headings use Inter's display optical size ("Inter Display"): tighter, crisper shapes for big text. */
+.font-display {
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 32;
 }
 
 /* Highlighter swipe behind a phrase */
