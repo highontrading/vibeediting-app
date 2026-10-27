@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #08080a;
+  --color-panel: #101013;
+  --color-panel-2: #16161a;
+  --color-line: #24242b;
+  --color-line-strong: #34343d;
+  --color-fg: #ededf0;
+  --color-muted: #9a9aa5;
+  --color-dim: #6b6b76;
+  --color-neon: #c6f432;
+  --color-neon-dim: #9fc523;
+  --color-violet: #8b7cff;
+  --color-teal: #2dd4bf;
+  --color-amber: #fbbf24;
+  --color-rose: #fb7185;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+::selection {
+  background: var(--color-neon);
+  color: #000;
+}
+
+/* Faint editor grid behind sections */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Moving playhead on the hero timeline */
+@keyframes playhead {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+  }
+}
+.animate-playhead {
+  animation: playhead 9s linear infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-playhead,
+  .animate-blink {
+    animation: none;
+  }
+}
