@@ -35,7 +35,7 @@ export function ResendForm() {
         required
         placeholder="you@example.com"
         autoComplete="email"
-        className="flex-1 rounded-full border border-ink bg-paper px-5 py-3 placeholder:text-ink-mute focus:shadow-sticker focus:outline-none"
+        className="flex-1 rounded-xl border-[1.5px] border-ink bg-paper px-4 py-3 font-mono text-sm placeholder:text-ink-mute focus:shadow-sticker focus:outline-none"
       />
       <PillButton type="submit" variant="solid" disabled={state === "busy"}>
         {state === "busy" ? "Sending…" : "Resend my key"}

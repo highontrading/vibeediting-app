@@ -15,7 +15,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 px-3 pt-3 sm:px-6">
       <div aria-hidden className="absolute inset-x-0 top-0 h-3 bg-cream" />
       <div className="relative mx-auto flex h-[68px] max-w-6xl items-stretch rounded-2xl border border-ink bg-paper/95 backdrop-blur">
-        <div className="flex items-center border-r border-ink px-5">
+        <div className="flex items-center border-r border-ink px-4 sm:px-5">
           <Logo />
         </div>
         <nav className="hidden flex-1 items-center justify-end gap-7 pr-6 font-mono text-[11px] uppercase tracking-[0.16em] lg:flex">
@@ -26,7 +26,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-2 px-3 lg:ml-0">
-          <PillLink href="/checkout" className="px-4">
+          <PillLink href="/checkout" className="px-4 py-2.5">
             Buy now
           </PillLink>
           <details className="relative lg:hidden">

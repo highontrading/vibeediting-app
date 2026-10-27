@@ -27,7 +27,7 @@ export default async function DocPage({ params }: PageProps<"/docs/[slug]">) {
   return (
     <article className="max-w-3xl">
       <Label>{doc.section}</Label>
-      <h1 className="mt-4 font-serif text-5xl leading-[0.95] tracking-[-0.03em] text-balance sm:text-6xl">{doc.title}</h1>
+      <h1 className="mt-4 font-serif text-5xl leading-[1.04] tracking-[-0.025em] text-balance sm:text-6xl">{doc.title}</h1>
       <p className="mt-4 text-lg text-ink-soft">{doc.description}</p>
 
       <div className="mt-8 aspect-video overflow-hidden rounded-3xl border-[1.5px] border-ink bg-paper">

@@ -14,14 +14,14 @@ export function Pricing() {
     <div className="mx-auto mt-14 grid max-w-4xl items-start gap-8 md:grid-cols-[1.15fr_1fr]">
       <div className={`grid gap-8 ${plans.length > 1 ? "sm:grid-cols-2 md:col-span-2" : ""}`}>
         {plans.map((plan) => (
-          <div key={plan.id} className="relative rounded-3xl border-[1.5px] border-ink bg-pink p-2 shadow-sticker">
+          <div key={plan.id} className="relative rounded-3xl border-[1.5px] border-ink bg-pink p-2 shadow-hard">
             {plan.badge && <Tag color="butter" className="absolute -top-4 left-6 -rotate-3">{plan.badge}</Tag>}
             <Heart className="animate-float absolute -top-5 -right-4 w-11" />
             <div className="rounded-[18px] border border-dashed border-ink/50 bg-paper p-7">
-              <h3 className="font-serif text-4xl leading-none tracking-tight lowercase">{plan.name}</h3>
+              <h3 className="font-serif text-4xl leading-none tracking-tight">{plan.name}</h3>
               <p className="mt-2 text-sm text-ink-soft">{plan.description}</p>
               <p className="mt-6 flex items-baseline gap-3">
-                <span className="font-serif text-7xl leading-none tracking-[-0.04em]">{formatInr(plan.priceInr)}</span>
+                <span className="font-serif text-7xl leading-none tracking-[-0.03em]">{formatInr(plan.priceInr)}</span>
                 {plan.compareAtInr && (
                   <span className="text-xl text-ink-mute line-through decoration-pink-deep decoration-2">
                     {formatInr(plan.compareAtInr)}

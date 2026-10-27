@@ -192,7 +192,7 @@ function Field({ label, hint, ...props }: { label: string; hint?: string } & Rea
       <span className="font-mono text-[11px] uppercase tracking-[0.16em]">{label}</span>
       <input
         {...props}
-        className="mt-2 w-full rounded-xl border border-ink bg-paper px-4 py-3 placeholder:text-ink-mute focus:bg-cream focus:shadow-sticker focus:outline-none"
+        className="mt-2 w-full rounded-xl border-[1.5px] border-ink bg-paper px-4 py-3 font-mono text-[14px] placeholder:text-ink-mute focus:bg-cream focus:shadow-sticker focus:outline-none"
       />
       {hint && <span className="mt-1.5 block text-xs text-ink-mute">{hint}</span>}
     </label>
@@ -206,7 +206,7 @@ function Success({ licenseKey, email }: { licenseKey: string; email: string }) {
       <span className="inline-block rounded-full border border-ink bg-green px-3 py-1 font-mono text-[11px] uppercase tracking-wider">
         ✓ Payment successful
       </span>
-      <h2 className="mt-4 font-serif text-5xl leading-none tracking-tight">welcome aboard!</h2>
+      <h2 className="mt-4 font-serif text-5xl leading-none tracking-tight">Welcome aboard!</h2>
       <p className="mt-3 text-sm text-ink-soft">This is your license key. We also emailed it to {email}.</p>
       <div className="mt-6 flex items-center justify-center gap-3 rounded-2xl border border-dashed border-ink bg-butter p-4">
         <code className="font-mono text-lg font-bold tracking-wider break-all">{licenseKey}</code>

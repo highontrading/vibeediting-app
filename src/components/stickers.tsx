@@ -75,3 +75,46 @@ export function Cursor({ className, style }: P) {
     </svg>
   );
 }
+
+// Brand mark: an ink flower with a play button in the middle.
+export function FlowerMark({ className, style }: P) {
+  const petals = Array.from({ length: 8 }, (_, i) => i * 45);
+  return (
+    <svg viewBox="0 0 64 64" className={className} style={style} aria-hidden>
+      {petals.map((deg) => (
+        <ellipse key={deg} cx="32" cy="15" rx="8.5" ry="13" fill="#1f1d1b" transform={`rotate(${deg} 32 32)`} />
+      ))}
+      <circle cx="32" cy="32" r="12" fill="#1f1d1b" />
+      <path d="M28.5 25.5v13l10.5-6.5z" fill="#d6f5a2" />
+    </svg>
+  );
+}
+
+// Round badge with text spinning around a smiley. Pass a position class (relative/absolute) in className.
+export function SpinBadge({ className, text = "edit · vibe · post · repeat · " }: P & { text?: string }) {
+  return (
+    <div className={className ?? "relative"} aria-hidden>
+      <svg viewBox="0 0 120 120" className="animate-spin-slow absolute inset-0 h-full w-full">
+        <defs>
+          <path id="badge-circle" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0" />
+        </defs>
+        <circle cx="60" cy="60" r="58" fill="#fffdf8" stroke="#1f1d1b" strokeWidth="1.5" />
+        <text fontFamily="DM Mono, monospace" fontSize="11.5" letterSpacing="2.2" fill="#1f1d1b">
+          <textPath href="#badge-circle">{text.repeat(2)}</textPath>
+        </text>
+      </svg>
+      <svg viewBox="0 0 120 120" className="absolute inset-0 h-full w-full">
+        <defs>
+          <linearGradient id="badge-face" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#f9c6d8" />
+            <stop offset="0.5" stopColor="#d9cdf5" />
+            <stop offset="1" stopColor="#d6f5a2" />
+          </linearGradient>
+        </defs>
+        <circle cx="60" cy="60" r="27" fill="url(#badge-face)" stroke="#1f1d1b" strokeWidth="2.5" />
+        <path d="M49 55q3-5 6 0M65 55q3-5 6 0" fill="none" stroke="#1f1d1b" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M48 64q12 12 24 0" fill="none" stroke="#1f1d1b" strokeWidth="2.5" strokeLinecap="round" />
+      </svg>
+    </div>
+  );
+}

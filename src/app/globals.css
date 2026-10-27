@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-/* Design system: cream graph paper, ink outlines, pastel blocks, serif display + mono labels. */
+/* Design system: cream graph paper, ink outlines, pastel blocks with hard offset shadows,
+   Newsreader serif headlines, DM Mono for labels and prompts, Plus Jakarta Sans for reading text. */
 @theme {
   --color-cream: #fbf8f1;
   --color-paper: #fffdf8;
@@ -12,15 +13,19 @@
   --color-pink-deep: #f08db0;
   --color-blue: #bfe3ea;
   --color-green: #c4dc94;
+  --color-lime: #d6f5a2;
   --color-lilac: #d9cdf5;
   --color-butter: #fde7a8;
   --color-peach: #f8cbb3;
 
-  --font-serif: "DM Serif Display", ui-serif, Georgia, serif;
+  --font-serif: "Newsreader Variable", ui-serif, Georgia, serif;
   --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Space Mono", ui-monospace, monospace;
+  --font-mono: "DM Mono", ui-monospace, monospace;
 
   --shadow-sticker: 3px 3px 0 0 var(--color-ink);
+  --shadow-hard: 4px 4px 0 0 var(--color-ink);
+  --shadow-lilac: 5px 5px 0 0 var(--color-lilac);
+  --shadow-pink: 5px 5px 0 0 var(--color-pink);
 }
 
 html {
@@ -55,11 +60,21 @@ body {
   background-size: 22px 22px;
 }
 
-/* Highlighter swipe behind a word */
+/* Highlighter swipe behind a phrase */
 .highlight {
-  background: linear-gradient(to bottom, transparent 18%, var(--color-pink) 18%, var(--color-pink) 88%, transparent 88%);
-  padding: 0 0.12em;
+  background: linear-gradient(to bottom, transparent 14%, var(--color-pink) 14%, var(--color-pink) 92%, transparent 92%);
+  padding: 0 0.1em;
   box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
 }
 
 @keyframes marquee {
@@ -98,6 +113,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
+  .animate-spin-slow,
   .animate-float,
   .animate-blink {
     animation: none;

@@ -17,7 +17,7 @@ export default function DocsIndex() {
   return (
     <>
       <Label>Tutorials</Label>
-      <h1 className="mt-4 font-serif text-6xl leading-[0.92] tracking-[-0.03em]">learn vibeediting</h1>
+      <h1 className="mt-4 font-serif text-6xl leading-[1.02] tracking-[-0.025em]">Learn vibeediting</h1>
       <p className="mt-5 max-w-2xl text-ink-soft">
         Start with{" "}
         <Link href="/docs/getting-started" className="font-semibold underline decoration-pink-deep decoration-2 underline-offset-4">

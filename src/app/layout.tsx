@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import "@fontsource/dm-serif-display/400.css";
-import "@fontsource/dm-serif-display/400-italic.css";
+import "@fontsource-variable/newsreader/opsz.css";
+import "@fontsource-variable/newsreader/opsz-italic.css";
 import "@fontsource-variable/plus-jakarta-sans/wght.css";
-import "@fontsource/space-mono/400.css";
-import "@fontsource/space-mono/700.css";
+import "@fontsource/dm-mono/400.css";
+import "@fontsource/dm-mono/500.css";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -33,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col font-sans">
         <AnnouncementBar />
         <SiteHeader />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 overflow-x-clip">{children}</main>
         <SiteFooter />
       </body>
     </html>
