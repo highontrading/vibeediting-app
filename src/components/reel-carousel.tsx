@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import type { HeroReel } from "@/config/site";
-import { pastelBg } from "./ui";
 
 // Cards sit on a gentle arch. `offset` is measured in cards: it drifts on its own
 // (cards travel left → right), and dragging or swiping spins it with momentum.
@@ -158,7 +157,7 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
       >
         {reels.map((reel, i) => (
           <div
-            key={reel.src}
+            key={i}
             ref={(el) => {
               cardRefs.current[i] = el;
             }}
@@ -196,36 +195,18 @@ export function ReelCarousel({ reels }: { reels: HeroReel[] }) {
 
 function ReelCard({ reel }: { reel: HeroReel }) {
   return (
-    <div className="overflow-hidden rounded-[22px] border-[1.5px] border-ink bg-paper p-1.5 shadow-[0_18px_40px_-18px_rgb(31_29_27/0.45)]">
-      <div className="relative aspect-[9/16] overflow-hidden rounded-[16px] border border-ink/20">
-        <video
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-          src={reel.src}
-          poster={reel.poster}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          draggable={false}
-        />
-        <span
-          className={`absolute top-2.5 left-2.5 border border-ink/80 px-2 py-1 font-mono text-[9px] uppercase tracking-wider ${pastelBg[reel.color]}`}
-        >
-          {reel.label}
-        </span>
-        <span className="absolute top-2.5 right-2.5 hidden h-6 items-center gap-1 rounded-full bg-ink/80 px-2 font-mono text-[9px] text-cream sm:flex">
-          <span className="h-1.5 w-1.5 rounded-full bg-pink-deep" />
-          AI edit
-        </span>
-        <p className="absolute inset-x-3 bottom-[22%] text-center text-[15px] leading-tight font-extrabold text-balance text-ink sm:text-lg">
-          <span className="bg-butter box-decoration-clone px-1.5 py-0.5">{reel.caption}</span>
-        </p>
-      </div>
-      <p className="flex items-center justify-between px-1.5 pt-2 pb-0.5 font-mono text-[9.5px] text-ink-soft">
-        <span>✂ {reel.stat}</span>
-        <span>0:{(15 + reel.caption.length).toString().padStart(2, "0")}</span>
-      </p>
+    <div className="relative aspect-[9/16] overflow-hidden rounded-[22px] border-[1.5px] border-ink bg-ink/10 shadow-[0_18px_40px_-18px_rgb(31_29_27/0.45)]">
+      <video
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        src={reel.src}
+        poster={reel.poster}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        draggable={false}
+      />
     </div>
   );
 }

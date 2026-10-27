@@ -75,25 +75,13 @@ export const enabledPlans = () => plans.filter((p) => p.enabled);
 export const getPlan = (id: string) => plans.find((p) => p.id === id && p.enabled);
 
 export type HeroReel = {
-  src: string; // put your .mp4 in /public/videos and point to it here
-  poster?: string; // first-frame image, shown while the video loads
-  label: string; // small tag on the card
-  caption: string; // sample caption shown on the card
-  stat: string; // bottom line, e.g. "−1:12 of silences"
-  color: "pink" | "blue" | "green" | "lilac" | "butter" | "peach";
+  src: string; // a vertical (9:16) .mp4: a file in /public/videos or a full https URL
+  poster?: string; // optional first-frame image, shown while the video loads
 };
 
-// Vertical (9:16) videos in the hero carousel. PLACEHOLDERS: replace with real before/after edits.
-export const heroReels: HeroReel[] = [
-  { src: "/videos/reel-01.mp4", poster: "/videos/reel-01.jpg", label: "Talking head", caption: "3 mistakes new creators make", stat: "41 pauses cut", color: "pink" },
-  { src: "/videos/reel-02.mp4", poster: "/videos/reel-02.jpg", label: "Podcast clip", caption: "this changed everything", stat: "auto-reframed 9:16", color: "blue" },
-  { src: "/videos/reel-03.mp4", poster: "/videos/reel-03.jpg", label: "YouTube Short", caption: "wait for it…", stat: "hook score 8.7/10", color: "green" },
-  { src: "/videos/reel-04.mp4", poster: "/videos/reel-04.jpg", label: "Founder reel", caption: "we grew 3x in 90 days", stat: "+ animated chart", color: "lilac" },
-  { src: "/videos/reel-05.mp4", poster: "/videos/reel-05.jpg", label: "Hinglish captions", caption: "yeh trick koi nahi batata", stat: "word-by-word captions", color: "butter" },
-  { src: "/videos/reel-06.mp4", poster: "/videos/reel-06.jpg", label: "Product demo", caption: "watch this in 15 sec", stat: "+ title card", color: "peach" },
-  { src: "/videos/reel-07.mp4", poster: "/videos/reel-07.jpg", label: "Stock B-roll", caption: "mumbai never sleeps", stat: "3 Pexels clips added", color: "blue" },
-  { src: "/videos/reel-08.mp4", poster: "/videos/reel-08.jpg", label: "Ad creative", caption: "stop scrolling 👋", stat: "4 versions in 1 prompt", color: "pink" },
-];
+// Videos in the hero carousel. For now the same test video is used 8 times; swap in real edits later.
+const testReel = "https://xfyshcjptayuemcwxnpr.supabase.co/storage/v1/object/public/uploads/1791350223925-950d02cb-2f81-47d0-8e1d-851c8f2d3748.mp4";
+export const heroReels: HeroReel[] = Array.from({ length: 8 }, () => ({ src: testReel }));
 
 export type Feature = {
   title: string;
