@@ -12,6 +12,8 @@ Built with Next.js 16, Tailwind CSS 4, Postgres (Supabase), Razorpay and Resend.
 | Prices, plans, features, FAQ, business details, MCP package name | `src/config/site.ts` |
 | Tutorials | `content/docs/*.md` (add `video: YOUTUBE_ID` at the top to embed a video) |
 | Terms, Privacy, Refund, Delivery | `content/legal/*.md` |
+| Hero carousel videos (9:16 `.mp4`) | `public/videos/` + `heroReels` in `src/config/site.ts` (current ones are placeholders) |
+| Colours and fonts | `src/app/globals.css` (`@theme`) |
 | Landing page layout | `src/app/page.tsx` |
 
 Markdown files can use `{{TOKENS}}` such as `{{SUPPORT_EMAIL}}` or `{{MCP_PACKAGE}}`; see `src/lib/content.ts`.

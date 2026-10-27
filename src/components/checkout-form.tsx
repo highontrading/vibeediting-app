@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { Plan } from "@/config/site";
-import { Button, formatInr } from "./ui";
+import { PillButton, PillLink, formatInr } from "./ui";
 
 type RazorpayResponse = {
   razorpay_order_id: string;
@@ -108,7 +108,7 @@ export function CheckoutForm({ plans }: { plans: Plan[] }) {
   }
 
   if (status.kind === "done") return <Success licenseKey={status.licenseKey} email={status.email} />;
-  if (!plan) return <p className="text-muted">No plans are on sale right now.</p>;
+  if (!plan) return <p className="text-ink-soft">No plans are on sale right now.</p>;
 
   const busy = status.kind === "busy";
   return (
@@ -119,7 +119,7 @@ export function CheckoutForm({ plans }: { plans: Plan[] }) {
           {plans.map((p) => (
             <label
               key={p.id}
-              className={`cursor-pointer rounded-lg border p-4 ${p.id === planId ? "border-neon bg-panel-2" : "border-line"}`}
+              className={`cursor-pointer rounded-xl border p-4 ${p.id === planId ? "border-ink bg-pink" : "border-ink/30 bg-paper"}`}
             >
               <input
                 type="radio"
@@ -130,7 +130,7 @@ export function CheckoutForm({ plans }: { plans: Plan[] }) {
                 className="sr-only"
               />
               <span className="block font-semibold">{p.name}</span>
-              <span className="text-sm text-muted">{formatInr(p.priceInr)}</span>
+              <span className="text-sm text-ink-soft">{formatInr(p.priceInr)}</span>
             </label>
           ))}
         </fieldset>
@@ -155,15 +155,15 @@ export function CheckoutForm({ plans }: { plans: Plan[] }) {
         placeholder="+91 98765 43210"
       />
 
-      <label className="flex gap-3 text-sm text-muted">
-        <input type="checkbox" required className="mt-1 accent-neon" />
+      <label className="flex gap-3 text-sm text-ink-soft">
+        <input type="checkbox" required className="mt-1 h-4 w-4 shrink-0 accent-[#f08db0]" />
         <span>
           I have a Mac or Windows computer and my own Claude, ChatGPT or Cursor plan. I agree to the{" "}
-          <Link href="/terms" className="text-fg underline">
+          <Link href="/terms" className="font-semibold text-ink underline decoration-pink-deep underline-offset-2">
             Terms
           </Link>{" "}
           and{" "}
-          <Link href="/refund" className="text-fg underline">
+          <Link href="/refund" className="font-semibold text-ink underline decoration-pink-deep underline-offset-2">
             Refund Policy
           </Link>
           .
@@ -171,15 +171,17 @@ export function CheckoutForm({ plans }: { plans: Plan[] }) {
       </label>
 
       {status.kind === "error" && (
-        <p role="alert" className="rounded-lg border border-rose/40 bg-rose/10 px-4 py-3 text-sm text-rose">
+        <p role="alert" className="rounded-xl border border-ink bg-pink px-4 py-3 text-sm">
           {status.message}
         </p>
       )}
 
-      <Button type="submit" disabled={busy} className="w-full py-3.5 text-base">
+      <PillButton type="submit" variant="solid" disabled={busy} className="w-full py-3.5 text-base">
         {busy ? status.message : `Pay ${formatInr(plan.priceInr)}`}
-      </Button>
-      <p className="text-center font-mono text-xs text-dim">Secured by Razorpay · UPI · Cards · Net banking · Wallets</p>
+      </PillButton>
+      <p className="text-center font-mono text-[10.5px] uppercase tracking-wider text-ink-mute">
+        Secured by Razorpay · UPI · Cards · Net banking · Wallets
+      </p>
     </form>
   );
 }
@@ -187,12 +189,12 @@ export function CheckoutForm({ plans }: { plans: Plan[] }) {
 function Field({ label, hint, ...props }: { label: string; hint?: string } & React.ComponentProps<"input">) {
   return (
     <label className="block">
-      <span className="text-sm font-medium">{label}</span>
+      <span className="font-mono text-[11px] uppercase tracking-[0.16em]">{label}</span>
       <input
         {...props}
-        className="mt-1.5 w-full rounded-lg border border-line-strong bg-bg px-3.5 py-2.5 text-fg placeholder:text-dim focus:border-neon focus:outline-none"
+        className="mt-2 w-full rounded-xl border border-ink bg-paper px-4 py-3 placeholder:text-ink-mute focus:bg-cream focus:shadow-sticker focus:outline-none"
       />
-      {hint && <span className="mt-1 block text-xs text-dim">{hint}</span>}
+      {hint && <span className="mt-1.5 block text-xs text-ink-mute">{hint}</span>}
     </label>
   );
 }
@@ -201,28 +203,27 @@ function Success({ licenseKey, email }: { licenseKey: string; email: string }) {
   const [copied, setCopied] = useState(false);
   return (
     <div className="text-center">
-      <p className="font-mono text-sm text-neon">✓ Payment successful</p>
-      <h2 className="mt-3 text-2xl font-semibold">Welcome to vibeediting!</h2>
-      <p className="mt-2 text-sm text-muted">This is your license key. We also emailed it to {email}.</p>
-      <div className="mt-6 flex items-center justify-center gap-2 rounded-lg border border-neon/50 bg-bg p-4">
-        <code className="font-mono text-lg font-semibold tracking-wider break-all">{licenseKey}</code>
+      <span className="inline-block rounded-full border border-ink bg-green px-3 py-1 font-mono text-[11px] uppercase tracking-wider">
+        ✓ Payment successful
+      </span>
+      <h2 className="mt-4 font-serif text-5xl leading-none tracking-tight">welcome aboard!</h2>
+      <p className="mt-3 text-sm text-ink-soft">This is your license key. We also emailed it to {email}.</p>
+      <div className="mt-6 flex items-center justify-center gap-3 rounded-2xl border border-dashed border-ink bg-butter p-4">
+        <code className="font-mono text-lg font-bold tracking-wider break-all">{licenseKey}</code>
         <button
           type="button"
           onClick={async () => {
             await navigator.clipboard.writeText(licenseKey);
             setCopied(true);
           }}
-          className="shrink-0 rounded-md border border-line-strong px-3 py-1.5 text-xs hover:bg-panel-2"
+          className="shrink-0 rounded-full border border-ink bg-paper px-3 py-1.5 font-mono text-[11px] hover:bg-pink"
         >
-          {copied ? "Copied" : "Copy"}
+          {copied ? "copied" : "copy"}
         </button>
       </div>
-      <Link
-        href="/docs/getting-started"
-        className="mt-8 inline-flex rounded-lg bg-neon px-5 py-3 text-sm font-semibold text-black"
-      >
-        Start the install guide →
-      </Link>
+      <PillLink href="/docs/getting-started" variant="solid" className="mt-8">
+        Start the install guide
+      </PillLink>
     </div>
   );
 }

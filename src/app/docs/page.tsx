@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getDocs } from "@/lib/content";
-import { Eyebrow } from "@/components/ui";
+import { Label, pastelBg, type Pastel } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Tutorials",
   description: "Install vibeediting in Claude Code, Codex or Cursor and learn the editing workflows.",
 };
+
+const colors: Pastel[] = ["pink", "blue", "green", "lilac", "butter", "peach"];
 
 export default function DocsIndex() {
   const docs = getDocs();
@@ -14,15 +16,18 @@ export default function DocsIndex() {
 
   return (
     <>
-      <Eyebrow>Tutorials</Eyebrow>
-      <h1 className="mt-3 text-4xl font-semibold tracking-tight">Learn vibeediting</h1>
-      <p className="mt-4 max-w-2xl text-muted">
-        Start with <Link href="/docs/getting-started" className="text-neon underline underline-offset-4">Getting started</Link>.
-        Follow the steps in order and you will finish your first edit in about 15 minutes.
+      <Label>Tutorials</Label>
+      <h1 className="mt-4 font-serif text-6xl leading-[0.92] tracking-[-0.03em]">learn vibeediting</h1>
+      <p className="mt-5 max-w-2xl text-ink-soft">
+        Start with{" "}
+        <Link href="/docs/getting-started" className="font-semibold underline decoration-pink-deep decoration-2 underline-offset-4">
+          Getting started
+        </Link>
+        . Follow the steps in order and you will finish your first edit in about 15 minutes.
       </p>
-      {sections.map((section) => (
+      {sections.map((section, s) => (
         <section key={section} className="mt-12">
-          <h2 className="font-mono text-xs uppercase tracking-widest text-dim">{section}</h2>
+          <Label>{section}</Label>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {docs
               .filter((d) => d.section === section)
@@ -30,14 +35,17 @@ export default function DocsIndex() {
                 <Link
                   key={d.slug}
                   href={`/docs/${d.slug}`}
-                  className="group rounded-xl border border-line bg-panel p-5 transition-colors hover:border-neon/50"
+                  className="group flex gap-4 rounded-2xl border border-ink bg-paper p-5 transition hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-sticker"
                 >
-                  <p className="flex items-center justify-between font-semibold">
-                    {d.title}
-                    <span className="text-dim transition-colors group-hover:text-neon">→</span>
-                  </p>
-                  <p className="mt-1.5 text-sm text-muted">{d.description}</p>
-                  {d.video && <p className="mt-3 font-mono text-[11px] text-neon">▶ video tutorial</p>}
+                  <span className={`h-10 w-10 shrink-0 rounded-xl border border-ink ${pastelBg[colors[(d.order + s) % colors.length]]}`} />
+                  <span className="min-w-0">
+                    <span className="flex items-center justify-between gap-2 font-bold">
+                      {d.title}
+                      <span className="transition-transform group-hover:translate-x-1">→</span>
+                    </span>
+                    <span className="mt-1 block text-sm text-ink-soft">{d.description}</span>
+                    {d.video && <span className="mt-2 block font-mono text-[10px] uppercase">▶ video tutorial</span>}
+                  </span>
                 </Link>
               ))}
           </div>

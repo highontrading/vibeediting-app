@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./logo";
+import { Label, PillLink } from "./ui";
 import { business, site } from "@/config/site";
 
 const columns = [
@@ -33,38 +34,43 @@ const columns = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-line bg-panel/40">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
-        <div className="max-w-xs">
-          <Logo />
-          <p className="mt-4 text-sm text-muted">{site.tagline}</p>
-          <p className="mt-4 text-sm text-dim">
-            <a href={`mailto:${business.email}`} className="hover:text-fg">
+    <footer className="bg-cream px-3 pt-3 pb-3 sm:px-6">
+      <div className="mx-auto max-w-6xl rounded-3xl border border-ink bg-paper">
+        <div className="grid gap-10 p-8 sm:p-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div className="max-w-xs">
+            <Logo size="lg" />
+            <p className="mt-4 text-sm leading-relaxed text-ink-soft">{site.tagline}</p>
+            <PillLink href="/checkout" className="mt-6">
+              Get vibeediting
+            </PillLink>
+          </div>
+          {columns.map((col) => (
+            <div key={col.title}>
+              <Label>{col.title}</Label>
+              <ul className="mt-4 space-y-2.5 text-sm">
+                {col.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="hover:underline hover:decoration-pink-deep hover:decoration-2 hover:underline-offset-4">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-col gap-2 border-t border-ink px-8 py-5 text-xs text-ink-mute sm:px-10 md:flex-row md:justify-between">
+          <p>
+            © {business.legalName} ·{" "}
+            <a href={`mailto:${business.email}`} className="hover:text-ink">
               {business.email}
             </a>
           </p>
+          <p className="max-w-xl md:text-right">
+            vibeediting is independent and not affiliated with Anthropic, OpenAI, Anysphere (Cursor), Adobe or Blackmagic
+            Design. All product names are trademarks of their owners.
+          </p>
         </div>
-        {columns.map((col) => (
-          <div key={col.title}>
-            <p className="font-mono text-xs uppercase tracking-widest text-dim">{col.title}</p>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              {col.links.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-muted hover:text-fg">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <div className="border-t border-line">
-        <p className="mx-auto max-w-6xl px-4 py-6 text-xs leading-relaxed text-dim sm:px-6">
-          © {business.legalName}. vibeediting is an independent product and is not affiliated with or endorsed
-          by Anthropic, OpenAI, Anysphere (Cursor), Adobe or Blackmagic Design. All product names are trademarks
-          of their owners.
-        </p>
       </div>
     </footer>
   );

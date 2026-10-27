@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getLegal } from "@/lib/content";
 import { Markdown } from "./markdown";
-import { Eyebrow } from "./ui";
+import { Label } from "./ui";
 
 export function legalMetadata(slug: string) {
   const doc = getLegal(slug);
@@ -13,9 +13,9 @@ export function LegalPage({ slug }: { slug: string }) {
   if (!doc) notFound();
   return (
     <article className="mx-auto max-w-3xl px-4 py-14 sm:px-6 md:py-20">
-      <Eyebrow>Legal</Eyebrow>
-      <h1 className="mt-3 text-4xl font-semibold tracking-tight">{doc.title}</h1>
-      <div className="mt-6">
+      <Label>Legal</Label>
+      <h1 className="mt-4 font-serif text-5xl leading-[0.95] tracking-[-0.03em] sm:text-6xl">{doc.title}</h1>
+      <div className="mt-8 rounded-3xl border border-ink bg-paper px-6 py-4 sm:px-10 sm:py-6">
         <Markdown>{doc.body}</Markdown>
       </div>
     </article>

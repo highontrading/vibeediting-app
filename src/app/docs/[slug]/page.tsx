@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDoc, getDocs } from "@/lib/content";
 import { Markdown } from "@/components/markdown";
-import { Eyebrow } from "@/components/ui";
+import { Label } from "@/components/ui";
+import { PlayBadge } from "@/components/stickers";
 
 export function generateStaticParams() {
   return getDocs().map((d) => ({ slug: d.slug }));
@@ -25,11 +26,11 @@ export default async function DocPage({ params }: PageProps<"/docs/[slug]">) {
 
   return (
     <article className="max-w-3xl">
-      <Eyebrow>{doc.section}</Eyebrow>
-      <h1 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{doc.title}</h1>
-      <p className="mt-3 text-lg text-muted">{doc.description}</p>
+      <Label>{doc.section}</Label>
+      <h1 className="mt-4 font-serif text-5xl leading-[0.95] tracking-[-0.03em] text-balance sm:text-6xl">{doc.title}</h1>
+      <p className="mt-4 text-lg text-ink-soft">{doc.description}</p>
 
-      <div className="mt-8 aspect-video overflow-hidden rounded-xl border border-line bg-panel">
+      <div className="mt-8 aspect-video overflow-hidden rounded-3xl border-[1.5px] border-ink bg-paper">
         {doc.video ? (
           <iframe
             className="h-full w-full"
@@ -39,11 +40,11 @@ export default async function DocPage({ params }: PageProps<"/docs/[slug]">) {
             allowFullScreen
           />
         ) : (
-          <div className="bg-grid flex h-full flex-col items-center justify-center gap-2 text-center">
-            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-line-strong text-neon">
-              ▶
-            </span>
-            <p className="font-mono text-xs text-dim">Video tutorial coming soon. Follow the written steps below.</p>
+          <div className="bg-paper-grid flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
+            <PlayBadge className="w-14" />
+            <p className="font-mono text-[11px] uppercase tracking-wider text-ink-soft">
+              Video tutorial coming soon. Follow the written steps below.
+            </p>
           </div>
         )}
       </div>
@@ -52,11 +53,11 @@ export default async function DocPage({ params }: PageProps<"/docs/[slug]">) {
         <Markdown>{doc.body}</Markdown>
       </div>
 
-      <nav className="mt-14 grid gap-4 border-t border-line pt-8 sm:grid-cols-2">
+      <nav className="mt-14 grid gap-4 border-t border-dashed border-ink/30 pt-8 sm:grid-cols-2">
         {prev ? (
-          <Link href={`/docs/${prev.slug}`} className="rounded-lg border border-line p-4 hover:border-line-strong">
-            <span className="font-mono text-xs text-dim">← Previous</span>
-            <span className="mt-1 block font-medium">{prev.title}</span>
+          <Link href={`/docs/${prev.slug}`} className="rounded-2xl border border-ink bg-paper p-4 hover:bg-blue">
+            <span className="font-mono text-[11px] uppercase tracking-wider text-ink-mute">← Previous</span>
+            <span className="mt-1 block font-bold">{prev.title}</span>
           </Link>
         ) : (
           <span />
@@ -64,10 +65,10 @@ export default async function DocPage({ params }: PageProps<"/docs/[slug]">) {
         {next && (
           <Link
             href={`/docs/${next.slug}`}
-            className="rounded-lg border border-line p-4 text-right hover:border-neon/50"
+            className="rounded-2xl border border-ink bg-paper p-4 text-right hover:bg-pink"
           >
-            <span className="font-mono text-xs text-dim">Next →</span>
-            <span className="mt-1 block font-medium">{next.title}</span>
+            <span className="font-mono text-[11px] uppercase tracking-wider text-ink-mute">Next →</span>
+            <span className="mt-1 block font-bold">{next.title}</span>
           </Link>
         )}
       </nav>

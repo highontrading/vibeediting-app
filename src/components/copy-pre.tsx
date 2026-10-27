@@ -7,11 +7,11 @@ export function CopyPre(props: React.ComponentProps<"pre">) {
   const ref = useRef<HTMLPreElement>(null);
   const [copied, setCopied] = useState(false);
   return (
-    <div className="group relative my-5">
+    <div className="relative my-5">
       <pre
         ref={ref}
         {...props}
-        className="overflow-x-auto rounded-lg border border-line bg-bg p-4 pr-20 font-mono text-[13px] leading-relaxed"
+        className="overflow-x-auto rounded-2xl border-[1.5px] border-ink bg-ink p-4 pr-20 font-mono text-[13px] leading-relaxed text-cream"
       />
       <button
         type="button"
@@ -20,7 +20,7 @@ export function CopyPre(props: React.ComponentProps<"pre">) {
           setCopied(true);
           setTimeout(() => setCopied(false), 1500);
         }}
-        className="absolute right-2 top-2 rounded-md border border-line-strong bg-panel px-2.5 py-1 font-mono text-[11px] text-muted hover:text-fg"
+        className="absolute top-2.5 right-2.5 rounded-full border border-ink bg-pink px-3 py-1 font-mono text-[11px] text-ink hover:bg-butter"
       >
         {copied ? "copied" : "copy"}
       </button>

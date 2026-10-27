@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "./ui";
+import { PillButton } from "./ui";
 
 export function ResendForm() {
   const [state, setState] = useState<"idle" | "busy" | "sent" | "error">("idle");
@@ -20,7 +20,7 @@ export function ResendForm() {
 
   if (state === "sent") {
     return (
-      <p className="rounded-lg border border-neon/40 bg-neon/5 px-4 py-3 text-sm">
+      <p className="rounded-2xl border border-ink bg-green px-4 py-3 text-sm">
         If that email bought vibeediting, the license key is on its way. Check your spam folder too. You can ask
         again after 5 minutes.
       </p>
@@ -35,12 +35,12 @@ export function ResendForm() {
         required
         placeholder="you@example.com"
         autoComplete="email"
-        className="flex-1 rounded-lg border border-line-strong bg-bg px-3.5 py-2.5 placeholder:text-dim focus:border-neon focus:outline-none"
+        className="flex-1 rounded-full border border-ink bg-paper px-5 py-3 placeholder:text-ink-mute focus:shadow-sticker focus:outline-none"
       />
-      <Button type="submit" disabled={state === "busy"}>
+      <PillButton type="submit" variant="solid" disabled={state === "busy"}>
         {state === "busy" ? "Sending…" : "Resend my key"}
-      </Button>
-      {state === "error" && <p className="text-sm text-rose">Enter a valid email address.</p>}
+      </PillButton>
+      {state === "error" && <p className="text-sm text-pink-deep">Enter a valid email address.</p>}
     </form>
   );
 }

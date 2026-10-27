@@ -74,54 +74,84 @@ export const plans: Plan[] = [
 export const enabledPlans = () => plans.filter((p) => p.enabled);
 export const getPlan = (id: string) => plans.find((p) => p.id === id && p.enabled);
 
+export type HeroReel = {
+  src: string; // put your .mp4 in /public/videos and point to it here
+  poster?: string; // first-frame image, shown while the video loads
+  label: string; // small tag on the card
+  caption: string; // sample caption shown on the card
+  stat: string; // bottom line, e.g. "−1:12 of silences"
+  color: "pink" | "blue" | "green" | "lilac" | "butter" | "peach";
+};
+
+// Vertical (9:16) videos in the hero carousel. PLACEHOLDERS: replace with real before/after edits.
+export const heroReels: HeroReel[] = [
+  { src: "/videos/reel-01.mp4", poster: "/videos/reel-01.jpg", label: "Talking head", caption: "3 mistakes new creators make", stat: "41 pauses cut", color: "pink" },
+  { src: "/videos/reel-02.mp4", poster: "/videos/reel-02.jpg", label: "Podcast clip", caption: "this changed everything", stat: "auto-reframed 9:16", color: "blue" },
+  { src: "/videos/reel-03.mp4", poster: "/videos/reel-03.jpg", label: "YouTube Short", caption: "wait for it…", stat: "hook score 8.7/10", color: "green" },
+  { src: "/videos/reel-04.mp4", poster: "/videos/reel-04.jpg", label: "Founder reel", caption: "we grew 3x in 90 days", stat: "+ animated chart", color: "lilac" },
+  { src: "/videos/reel-05.mp4", poster: "/videos/reel-05.jpg", label: "Hinglish captions", caption: "yeh trick koi nahi batata", stat: "word-by-word captions", color: "butter" },
+  { src: "/videos/reel-06.mp4", poster: "/videos/reel-06.jpg", label: "Product demo", caption: "watch this in 15 sec", stat: "+ title card", color: "peach" },
+  { src: "/videos/reel-07.mp4", poster: "/videos/reel-07.jpg", label: "Stock B-roll", caption: "mumbai never sleeps", stat: "3 Pexels clips added", color: "blue" },
+  { src: "/videos/reel-08.mp4", poster: "/videos/reel-08.jpg", label: "Ad creative", caption: "stop scrolling 👋", stat: "4 versions in 1 prompt", color: "pink" },
+];
+
 export type Feature = {
   title: string;
   body: string;
-  track: "video" | "audio" | "text" | "fx";
+  color: "pink" | "blue" | "green" | "lilac" | "butter" | "peach";
+  visual: "cut" | "captions" | "motion" | "stock" | "analyze" | "reframe" | "style" | "export";
   soon?: boolean;
 };
 
 // TODO: keep this list in sync with what the MCP really does.
 export const features: Feature[] = [
   {
-    title: "Cut silences and filler words",
+    title: "Cut silences & fillers",
     body: "Removes pauses, \"umm\", \"uhh\" and retakes from talking-head videos in one go.",
-    track: "audio",
+    color: "pink",
+    visual: "cut",
   },
   {
-    title: "Auto captions in your style",
-    body: "Word-by-word animated captions, in Hindi, English or Hinglish, with your fonts and colours.",
-    track: "text",
+    title: "Captions in your style",
+    body: "Word-by-word animated captions in Hindi, English or Hinglish, with your fonts and colours.",
+    color: "butter",
+    visual: "captions",
   },
   {
     title: "Motion graphics B-roll",
-    body: "Your AI agent writes the animations as code: titles, charts, call-outs. No copyright worries.",
-    track: "fx",
+    body: "Your AI writes the animations as code: titles, charts, call-outs. Made fresh, so no copyright worries.",
+    color: "blue",
+    visual: "motion",
   },
   {
     title: "Free stock footage",
-    body: "Search and drop in free, copyright-free clips from Pexels and Pixabay without leaving the chat.",
-    track: "video",
+    body: "Search and drop in copyright-free clips from Pexels and Pixabay without leaving the chat.",
+    color: "green",
+    visual: "stock",
   },
   {
     title: "Analyse your video",
-    body: "Get notes on your hook, pacing and boring parts before you publish.",
-    track: "text",
+    body: "Get notes on your hook, pacing and the boring parts before you hit publish.",
+    color: "lilac",
+    visual: "analyze",
   },
   {
-    title: "Reels, Shorts and YouTube",
-    body: "Reframe 16:9 to 9:16, make long-form YouTube edits, or cut one video into many clips.",
-    track: "video",
+    title: "Reels, Shorts & YouTube",
+    body: "Reframe 16:9 to 9:16, make long-form edits, or cut one video into many clips.",
+    color: "peach",
+    visual: "reframe",
   },
   {
     title: "Your own style system",
     body: "Save your fonts, colours, music and timing once. Every edit follows it.",
-    track: "fx",
+    color: "pink",
+    visual: "style",
   },
   {
-    title: "Export to Premiere and DaVinci",
+    title: "Export to Premiere & DaVinci",
     body: "Open the edit as a timeline in your editing app to finish it by hand.",
-    track: "video",
+    color: "blue",
+    visual: "export",
     soon: true,
   },
 ];
