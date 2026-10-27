@@ -7,6 +7,7 @@ import "@fontsource/dm-mono/500.css";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { RevealObserver, revealBootScript } from "@/components/reveal-observer";
 import { site } from "@/config/site";
 import "./globals.css";
 
@@ -29,8 +30,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className="h-full antialiased" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: revealBootScript }} />
+      </head>
       <body className="flex min-h-full flex-col font-sans">
+        <RevealObserver />
         <AnnouncementBar />
         <SiteHeader />
         <main className="flex-1 overflow-x-clip">{children}</main>

@@ -171,7 +171,7 @@ export function CheckoutForm({ plans }: { plans: Plan[] }) {
       </label>
 
       {status.kind === "error" && (
-        <p role="alert" className="rounded-xl border border-ink bg-pink px-4 py-3 text-sm">
+        <p role="alert" className="animate-pop-in rounded-xl border border-ink bg-pink px-4 py-3 text-sm">
           {status.message}
         </p>
       )}
@@ -202,7 +202,7 @@ function Field({ label, hint, ...props }: { label: string; hint?: string } & Rea
 function Success({ licenseKey, email }: { licenseKey: string; email: string }) {
   const [copied, setCopied] = useState(false);
   return (
-    <div className="text-center">
+    <div className="animate-pop-in text-center">
       <span className="inline-block rounded-full border border-ink bg-green px-3 py-1 font-mono text-[11px] uppercase tracking-wider">
         ✓ Payment successful
       </span>

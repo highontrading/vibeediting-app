@@ -26,7 +26,7 @@ export default function DocsIndex() {
         . Follow the steps in order and you will finish your first edit in about 15 minutes.
       </p>
       {sections.map((section, s) => (
-        <section key={section} className="mt-12">
+        <section key={section} data-reveal className="mt-12">
           <Label>{section}</Label>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {docs

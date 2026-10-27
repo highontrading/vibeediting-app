@@ -71,14 +71,14 @@ export default function Home() {
           <ChatBubble className="animate-float absolute top-6 right-[6%] w-12 [animation-delay:-2s] sm:w-16" style={floatR(8)} />
           <Sparkle className="animate-float absolute top-[46%] left-[4%] hidden w-10 [animation-delay:-1s] md:block" />
 
-          <h1 className="mx-auto max-w-4xl font-serif text-[42px] leading-[1.04] tracking-[-0.025em] text-balance sm:text-6xl lg:text-[76px]">
+          <h1 data-reveal className="mx-auto max-w-4xl font-serif text-[42px] leading-[1.04] tracking-[-0.025em] text-balance sm:text-6xl lg:text-[76px]">
             Edit your videos by just talking. Meet your new <span className="highlight">AI video editor</span>.
           </h1>
-          <p className="mx-auto mt-6 max-w-xl font-mono text-[14.5px] leading-relaxed text-pretty sm:text-[15.5px]">
+          <p data-reveal style={{ "--reveal-delay": "120ms" } as React.CSSProperties} className="mx-auto mt-6 max-w-xl font-mono text-[14.5px] leading-relaxed text-pretty sm:text-[15.5px]">
             Cut, caption and animate Reels, Shorts and YouTube videos with Claude Code, Codex or Cursor, right on your
             own computer.
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div data-reveal style={{ "--reveal-delay": "220ms" } as React.CSSProperties} className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <PillLink href="/checkout">Get it for {formatInr(startingPrice)}</PillLink>
             <PillLink href="/docs" variant="ghost">
               See the tutorials
@@ -86,7 +86,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative mx-auto mt-10 max-w-[1400px] pb-12">
+        <div data-reveal="scale" style={{ "--reveal-delay": "320ms" } as React.CSSProperties} className="relative mx-auto mt-10 max-w-[1400px] pb-12">
           {/* Things you could type to your AI, stuck around the cards */}
           <div className="pointer-events-none absolute inset-x-0 top-0 z-[200] mx-auto hidden h-[520px] max-w-6xl md:block">
             <PromptChip color="butter" className="absolute top-2 left-[4%] -rotate-6">
@@ -126,7 +126,7 @@ export default function Home() {
 
       {/* Works inside */}
       <section className="pb-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-9 sm:px-6 md:flex-row md:justify-between">
+        <div data-reveal className="mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-9 sm:px-6 md:flex-row md:justify-between">
           <Label>Works inside the AI you already use</Label>
           <ul className="flex flex-wrap justify-center gap-2.5">
             {agents.map((a) => (
@@ -163,7 +163,7 @@ export default function Home() {
       {/* Runs locally */}
       <Sheet tone="grid" className="pb-16">
         <div className="mx-auto grid max-w-6xl items-center gap-16 px-4 pt-20 pb-20 sm:px-6 md:pt-28 lg:grid-cols-[1.1fr_1fr]">
-          <div>
+          <div data-reveal>
             <Label>Runs on your computer</Label>
             <SerifHeading className="mt-5">Turn raw takes into ready-to-post reels</SerifHeading>
             <ul className="mt-10 space-y-4">
@@ -180,7 +180,7 @@ export default function Home() {
               Read the setup guide
             </PillLink>
           </div>
-          <div className="relative px-4 py-10 sm:px-8">
+          <div data-reveal="scale" style={{ "--reveal-delay": "150ms" } as React.CSSProperties} className="relative px-4 py-10 sm:px-8">
             <Heart className="animate-float absolute top-0 right-6 z-10 w-12" style={floatR(10)} />
             <Clapper className="animate-float absolute -top-2 left-0 z-10 w-14 [animation-delay:-2s]" style={floatR(-10)} />
             <Scissors className="animate-float absolute right-0 bottom-0 z-10 w-14 [animation-delay:-3s]" style={floatR(-20)} />
@@ -198,7 +198,7 @@ export default function Home() {
             title="Turn late-night recordings into morning uploads"
             icon={<PlayBadge className="w-6" />}
           />
-          <div className="mt-14 rounded-[32px] border-[1.5px] border-ink bg-lime p-6 sm:p-10 lg:p-14">
+          <div data-reveal className="mt-14 rounded-[32px] border-[1.5px] border-ink bg-lime p-6 sm:p-10 lg:p-14">
             <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
               <div>
                 <h3 className="font-serif text-4xl leading-[1.05] tracking-[-0.02em] sm:text-5xl">Three steps to your first reel</h3>
@@ -239,9 +239,11 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4 pt-20 pb-20 sm:px-6 md:pt-24">
           <SectionIntro label="Who it's for" title="Made for people who would rather be creating" icon={<Cursor className="w-5" />} />
           <div className="mt-14 grid gap-7 md:grid-cols-3">
-            {audiences.map((a) => (
+            {audiences.map((a, i) => (
               <div
                 key={a.title}
+                data-reveal
+                style={{ "--reveal-delay": `${i * 110}ms` } as React.CSSProperties}
                 className={`rounded-2xl border-[1.5px] border-ink p-1.5 shadow-hard transition-transform hover:rotate-0 ${a.rotate} ${pastelBg[a.color]}`}
               >
                 <div className="h-full rounded-xl border border-dashed border-ink/50 p-6">
@@ -270,7 +272,7 @@ export default function Home() {
       {/* FAQ */}
       <Sheet id="faq" tone="grid" className="pb-16">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 pt-20 pb-20 sm:px-6 md:pt-24 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
+          <div data-reveal>
             <Label>FAQ</Label>
             <SerifHeading className="mt-5">Questions? We&apos;ve got answers</SerifHeading>
             <p className="mt-6 max-w-sm font-mono text-[14px] leading-relaxed text-ink-soft">
@@ -290,7 +292,7 @@ export default function Home() {
       <Sheet tone="pink" className="overflow-hidden">
         <Sparkle className="animate-float absolute top-14 left-[8%] w-12" />
         <Clapper className="animate-float absolute right-[7%] bottom-14 hidden w-16 [animation-delay:-2s] sm:block" style={floatR(10)} />
-        <div className="relative mx-auto flex max-w-4xl flex-col items-center px-4 pt-24 pb-28 text-center sm:px-6">
+        <div data-reveal className="relative mx-auto flex max-w-4xl flex-col items-center px-4 pt-24 pb-28 text-center sm:px-6">
           <Label className="text-ink">Ready when you are</Label>
           <h2 className="mt-6 font-serif text-[52px] leading-[1] tracking-[-0.03em] text-balance sm:text-7xl lg:text-8xl">
             Stop editing. <span className="italic">Start vibing.</span>

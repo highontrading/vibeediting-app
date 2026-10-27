@@ -25,7 +25,7 @@ export default function ContactPage() {
         </Link>{" "}
         first.
       </p>
-      <dl className="mt-10 overflow-hidden rounded-3xl border-[1.5px] border-ink bg-paper">
+      <dl data-reveal className="mt-10 overflow-hidden rounded-3xl border-[1.5px] border-ink bg-paper">
         {rows.map(([label, value], i) => (
           <div
             key={label}

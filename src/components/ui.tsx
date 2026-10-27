@@ -95,7 +95,7 @@ export function SectionIntro({
   className?: string;
 }) {
   return (
-    <div className={`mx-auto max-w-2xl text-center ${className}`}>
+    <div data-reveal className={`mx-auto max-w-2xl text-center ${className}`}>
       <div className="flex items-center justify-center gap-3">
         {icon}
         <Label>{label}</Label>
@@ -132,7 +132,7 @@ export function Sheet({
   return (
     <section
       id={id}
-      className={`relative -mt-8 scroll-mt-20 rounded-t-[36px] border-t-[1.5px] border-ink sm:rounded-t-[48px] ${bg} ${className}`}
+      className={`relative -mt-8 scroll-mt-24 rounded-t-[36px] border-t-[1.5px] border-ink sm:rounded-t-[48px] ${bg} ${className}`}
     >
       {children}
     </section>

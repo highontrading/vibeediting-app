@@ -20,7 +20,7 @@ export function ResendForm() {
 
   if (state === "sent") {
     return (
-      <p className="rounded-2xl border border-ink bg-green px-4 py-3 text-sm">
+      <p className="animate-pop-in rounded-2xl border border-ink bg-green px-4 py-3 text-sm">
         If that email bought vibeediting, the license key is on its way. Check your spam folder too. You can ask
         again after 5 minutes.
       </p>

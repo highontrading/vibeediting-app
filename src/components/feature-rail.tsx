@@ -16,25 +16,29 @@ export function FeatureRail({ features, visuals }: { features: Feature[]; visual
         className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pt-2 pb-6 [scrollbar-width:none] sm:scroll-px-6 sm:px-6 lg:scroll-px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))] lg:px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))] [&::-webkit-scrollbar]:hidden"
       >
         {features.map((f, i) => (
-          <article
+          <div
             key={f.title}
-            className="flex w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-ink bg-paper sm:w-[300px]"
+            data-reveal
+            style={{ "--reveal-delay": `${Math.min(i, 4) * 80}ms` } as React.CSSProperties}
+            className="flex w-[280px] shrink-0 snap-start sm:w-[300px]"
           >
-            {visuals[i]}
-            <div className={`flex flex-1 flex-col border-t border-ink p-1.5 ${pastelBg[f.color]}`}>
-              <div className="flex flex-1 flex-col rounded-xl border border-dashed border-ink/50 px-5 pt-5 pb-6 text-center">
-                <h3 className="text-lg font-extrabold tracking-tight">
-                  {f.title}
-                  {f.soon && (
-                    <span className="ml-2 inline-block -translate-y-0.5 rounded-full border border-ink bg-paper px-2 py-0.5 align-middle font-mono text-[9px] font-normal uppercase">
-                      soon
-                    </span>
-                  )}
-                </h3>
-                <p className="mt-2.5 text-[13.5px] leading-relaxed text-ink-soft">{f.body}</p>
+            <article className="flex w-full flex-col overflow-hidden rounded-2xl border border-ink bg-paper transition duration-300 hover:-translate-y-1 hover:shadow-hard">
+              {visuals[i]}
+              <div className={`flex flex-1 flex-col border-t border-ink p-1.5 ${pastelBg[f.color]}`}>
+                <div className="flex flex-1 flex-col rounded-xl border border-dashed border-ink/50 px-5 pt-5 pb-6 text-center">
+                  <h3 className="text-lg font-extrabold tracking-tight">
+                    {f.title}
+                    {f.soon && (
+                      <span className="ml-2 inline-block -translate-y-0.5 rounded-full border border-ink bg-paper px-2 py-0.5 align-middle font-mono text-[9px] font-normal uppercase">
+                        soon
+                      </span>
+                    )}
+                  </h3>
+                  <p className="mt-2.5 text-[13.5px] leading-relaxed text-ink-soft">{f.body}</p>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </div>
         ))}
       </div>
       <div className="mx-auto flex max-w-6xl justify-end gap-3 px-4 sm:px-6">

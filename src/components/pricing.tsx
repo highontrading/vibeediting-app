@@ -14,7 +14,7 @@ export function Pricing() {
     <div className="mx-auto mt-14 grid max-w-4xl items-start gap-8 md:grid-cols-[1.15fr_1fr]">
       <div className={`grid gap-8 ${plans.length > 1 ? "sm:grid-cols-2 md:col-span-2" : ""}`}>
         {plans.map((plan) => (
-          <div key={plan.id} className="relative rounded-3xl border-[1.5px] border-ink bg-pink p-2 shadow-hard">
+          <div key={plan.id} data-reveal="scale" className="relative rounded-3xl border-[1.5px] border-ink bg-pink p-2 shadow-hard">
             {plan.badge && <Tag color="butter" className="absolute -top-4 left-6 -rotate-3">{plan.badge}</Tag>}
             <Heart className="animate-float absolute -top-5 -right-4 w-11" />
             <div className="rounded-[18px] border border-dashed border-ink/50 bg-paper p-7">
@@ -49,7 +49,7 @@ export function Pricing() {
         ))}
       </div>
 
-      <div className="rounded-3xl border-[1.5px] border-ink bg-blue p-2 md:mt-10">
+      <div data-reveal style={{ "--reveal-delay": "140ms" } as React.CSSProperties} className="rounded-3xl border-[1.5px] border-ink bg-blue p-2 md:mt-10">
         <div className="rounded-[18px] border border-dashed border-ink/50 p-6">
           <h3 className="text-lg font-extrabold tracking-tight">What else you need</h3>
           <p className="mt-1 text-sm text-ink-soft">Please check these before buying.</p>
