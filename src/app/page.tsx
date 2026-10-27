@@ -8,7 +8,6 @@ import { Bolt, ChatBubble, Clapper, Cursor, Heart, PlayBadge, Scissors, Sparkle,
 import {
   Label,
   PillLink,
-  PromptChip,
   SectionIntro,
   SerifHeading,
   Sheet,
@@ -87,24 +86,6 @@ export default function Home() {
         </div>
 
         <div data-reveal="scale" style={{ "--reveal-delay": "320ms" } as React.CSSProperties} className="relative mx-auto mt-10 max-w-[1400px] pb-12">
-          {/* Things you could type to your AI, stuck around the cards */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-[200] mx-auto hidden h-[520px] max-w-6xl md:block">
-            <PromptChip color="butter" className="absolute top-2 left-[4%] -rotate-6">
-              Cut my umms and add Hinglish captions
-            </PromptChip>
-            <PromptChip color="lime" className="absolute bottom-6 left-[1%] rotate-3">
-              Add a bar chart when I say &quot;3x growth&quot;
-            </PromptChip>
-            <PromptChip color="lilac" className="absolute right-[3%] bottom-10 -rotate-3">
-              Turn this podcast into 3 Shorts
-            </PromptChip>
-            <SpinBadge className="absolute -top-6 right-[6%] h-28 w-28" />
-          </div>
-          <div className="mb-4 flex justify-center md:hidden">
-            <PromptChip color="butter" className="-rotate-2">
-              Cut my umms and add Hinglish captions
-            </PromptChip>
-          </div>
           <ReelCarousel reels={heroReels} />
         </div>
       </section>

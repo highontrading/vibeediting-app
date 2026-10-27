@@ -51,25 +51,6 @@ export function Tag({
   );
 }
 
-// A tilted chip with something you would type to your AI.
-export function PromptChip({
-  children,
-  color = "butter",
-  className = "",
-}: {
-  children: ReactNode;
-  color?: Pastel;
-  className?: string;
-}) {
-  return (
-    <span
-      className={`inline-block max-w-[230px] rounded-lg border-[1.5px] border-ink px-3 py-2 font-mono text-[12px] leading-snug font-medium shadow-sticker ${pastelBg[color]} ${className}`}
-    >
-      {children}
-    </span>
-  );
-}
-
 export type Pastel = "pink" | "blue" | "green" | "lime" | "lilac" | "butter" | "peach";
 export const pastelBg: Record<Pastel, string> = {
   pink: "bg-pink",
