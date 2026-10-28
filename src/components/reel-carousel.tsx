@@ -12,8 +12,8 @@ import type { HeroReel } from "@/config/site";
 const AUTO_SPEED = 0.22; // laptop: cards per second
 // Phone: average speed, and how much it eases off while a card is in the centre (0 = constant
 // speed, closer to 1 = longer pause in the centre). It never fully stops.
-const PHONE_SPEED = 0.3;
-const PHONE_EASE = 0.72;
+const PHONE_SPEED = 0.42;
+const PHONE_EASE = 0.6;
 const RESUME_AFTER = 1600; // ms of no touching before the automatic movement comes back
 const BUTTON_MOVE = 600; // ms for the arrow buttons
 
